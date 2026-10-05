@@ -1,0 +1,2212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StageRight — background treatments A–E</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* ── Type-only tokens (shared across all bg variants) ── */
+    --ink:        #1F3539;
+    --ink-2:      #2C4549;
+    --ink-soft:   #4F6468;
+    --ink-mute:   #7B8A8D;
+    --hairline:   #D9D0BE;
+    --hairline-2: #C5BAA4;
+
+    /* Brand accents (sage primary, used in italics) */
+    --sage:       #7FA08A;
+    --sage-deep:  #5A7E68;
+    --timber:     #B5895A;
+    --timber-deep:#8B6840;
+    --terra:      #C76F4E;
+
+    /* Shadows */
+    --shadow-hero:  0 64px 130px -50px rgba(31, 53, 57, 0.38),
+                    0 24px 60px  -20px rgba(31, 53, 57, 0.18);
+    --shadow-card:  0 30px 60px  -28px rgba(31, 53, 57, 0.22),
+                    0 10px 24px  -10px rgba(31, 53, 57, 0.10);
+    --shadow-soft:  0 16px 32px  -16px rgba(31, 53, 57, 0.18);
+
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-sm: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  html, body { color: var(--ink); }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    line-height: 1.55;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.4s ease;
+  }
+
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+  .wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 40px);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     BG TREATMENT A — Layered warm-white + grain
+  ═══════════════════════════════════════════════════════════════════ */
+  body.bg-a {
+    background: #FAF7F0;
+    --bg:        #FAF7F0;
+    --bg-soft:   #FCFAF5;
+    --surface:   #FFFFFF;
+    --surface-2: #FFFFFF;
+  }
+  body.bg-a::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    opacity: 0.18;
+    mix-blend-mode: multiply;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     BG TREATMENT B — Architectural blueprint  (POLISHED)
+     Conviction-mode: confident grid, dimension ticks, red-pencil italics,
+     architectural drawing title block bottom-right.
+  ═══════════════════════════════════════════════════════════════════ */
+  body.bg-b {
+    background-color: #FBFAF6;
+    --bg:        #FBFAF6;
+    --bg-soft:   #FDFCF8;
+    --surface:   #FCFCFA;        /* never pure white — tinted toward warm */
+    --surface-2: #FFFFFF;        /* one true white reserved for hero photo border */
+    background-image:
+      /* Dimension tick crosshair at major intersections (256px) — longer arms,
+         drafted-pencil weight. */
+      url("data:image/svg+xml,%3Csvg width='256' height='256' viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%231F3539' stroke-width='0.9' opacity='0.28' stroke-linecap='round'%3E%3Cline x1='118' y1='128' x2='138' y2='128'/%3E%3Cline x1='128' y1='118' x2='128' y2='138'/%3E%3C/g%3E%3C/svg%3E"),
+      /* Major grid — 64px, bumped to 0.09 for confident read */
+      linear-gradient(to right, rgba(31, 53, 57, 0.09) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(31, 53, 57, 0.09) 1px, transparent 1px),
+      /* Sub-grid — 16px, bumped to 0.035 */
+      linear-gradient(to right, rgba(31, 53, 57, 0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(31, 53, 57, 0.035) 1px, transparent 1px);
+    background-size: 256px 256px, 64px 64px, 64px 64px, 16px 16px, 16px 16px;
+    background-position: 0 0;
+    background-attachment: fixed;
+  }
+  body.bg-b::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.10;
+    mix-blend-mode: multiply;
+  }
+
+  /* ── Depth layer: fixed colored atmosphere behind the grid.
+        As content scrolls, BOTH the grid and these blobs stay still — true
+        parallax. Sage + timber tints, low opacity so the grid stays primary. ── */
+  body.bg-b .depth-blobs { display: block; }
+  body:not(.bg-b) .depth-blobs { display: none; }
+  .depth-blobs {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .depth-blobs .db {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    will-change: transform;
+  }
+  .depth-blobs .db-1 {
+    width: 55vw; height: 55vw; max-width: 760px; max-height: 760px;
+    top: -15%; right: -18%;
+    background: radial-gradient(circle, rgba(127, 160, 138, 0.22) 0%, transparent 65%);
+  }
+  .depth-blobs .db-2 {
+    width: 48vw; height: 48vw; max-width: 640px; max-height: 640px;
+    bottom: -20%; left: -12%;
+    background: radial-gradient(circle, rgba(181, 137, 90, 0.16) 0%, transparent 70%);
+  }
+  .depth-blobs .db-3 {
+    width: 32vw; height: 32vw; max-width: 420px; max-height: 420px;
+    top: 45%; left: 35%;
+    background: radial-gradient(circle, rgba(199, 111, 78, 0.10) 0%, transparent 75%);
+  }
+
+  /* ── B-specific italic accent: terra red, like blueprint red-pencil annotation.
+        Bigger color delta against deep-teal text, signals "marked on the plan." ── */
+  body.bg-b em.accent {
+    color: var(--terra);
+    font-variation-settings: "opsz" 144, "SOFT" 80;
+  }
+  body.bg-b .logo-text em { color: var(--terra); }
+  body.bg-b .stat-num .small { color: var(--terra); }
+  body.bg-b .nav-links a:hover { color: var(--terra); }
+  body.bg-b .compare-card.featured .compare-price em { color: var(--terra); }
+
+  /* ── Pushed terra presence: ~12–15% of surface ── */
+
+  /* 1. Section eyebrow numbers in terra mono */
+  body.bg-b .eyebrow .sec-num {
+    color: var(--terra);
+    font-weight: 600;
+    margin-right: 4px;
+  }
+  body.bg-b .eyebrow .sec-num::after {
+    content: ' ·';
+    color: var(--ink-mute);
+    font-weight: 500;
+    margin-left: 2px;
+  }
+
+  /* 2. Terra accent hairline above the technical strip — punctuation between
+        the hero and the trust line. 2px so it reads. */
+  body.bg-b .technical-strip {
+    border-top: 2px solid var(--terra);
+  }
+
+  /* 3. Featured card badge: sage → terra in B mode. Sharpest point on the page. */
+  body.bg-b .compare-card.featured .badge-fast {
+    background: var(--terra);
+    color: #FCFCFA;
+  }
+  /* Featured card price-tick (the leading line above the price) — adds a
+     terra dimension hairline to anchor the featured card visually. */
+  body.bg-b .compare-card.featured {
+    box-shadow:
+      inset 0 3px 0 0 var(--terra),
+      var(--shadow-card);
+  }
+  /* Strip dot indicators on the trust line: keep sage but the FIRST goes terra
+     so the eye reads the hairline and dot as a connected accent line. */
+  body.bg-b .strip-row span:first-child::before { background: var(--terra); }
+
+  /* 4. Selection styling — when users click-and-drag, highlight is terra. */
+  body.bg-b ::selection { background: var(--terra); color: #FBFAF6; }
+  body.bg-b ::-moz-selection { background: var(--terra); color: #FBFAF6; }
+
+  /* ── Architectural title block: a real drafting-paper signature in the
+        bottom-right corner. Multi-line, hairline-bordered, fixed. ── */
+  body.bg-b .title-block {
+    display: block;
+    position: fixed;
+    bottom: 16px; right: 16px;
+    z-index: 1;
+    pointer-events: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-soft);
+    background: rgba(252, 252, 250, 0.78);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border: 1px solid rgba(31, 53, 57, 0.18);
+    border-radius: 2px;
+    padding: 0;
+    width: 168px;
+    box-shadow: 0 6px 18px -10px rgba(31, 53, 57, 0.18);
+  }
+  body.bg-b .title-block .row {
+    display: flex;
+    border-bottom: 1px solid rgba(31, 53, 57, 0.10);
+    padding: 5px 8px;
+    line-height: 1;
+  }
+  body.bg-b .title-block .row:last-child { border-bottom: none; }
+  body.bg-b .title-block .row .k {
+    color: var(--ink-mute);
+    flex: 0 0 36%;
+    font-weight: 500;
+  }
+  body.bg-b .title-block .row .v { color: var(--ink); font-weight: 600; }
+  body.bg-b .title-block .row.head {
+    padding: 6px 8px;
+    background: rgba(31, 53, 57, 0.04);
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    justify-content: space-between;
+  }
+  body.bg-b .title-block .row.head .terra {
+    color: var(--terra);
+    font-weight: 600;
+  }
+  /* Hide title block on tight viewports */
+  @media (max-width: 720px) {
+    body.bg-b .title-block { display: none; }
+  }
+  /* Render only when B is active */
+  body:not(.bg-b) .title-block { display: none; }
+
+  /* ── Stat cards in B mode: drafted-onto-plan look. Sharper corners,
+        hairline border, no rounded-pill softness. ── */
+  body.bg-b .stat {
+    background: rgba(252, 252, 250, 0.95);
+    border: 1px solid rgba(31, 53, 57, 0.22);
+    border-radius: 4px;
+    box-shadow: 0 12px 28px -14px rgba(31, 53, 57, 0.25);
+  }
+  body.bg-b .stat-source {
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+
+  /* ── Section dividers in B mode: hairline + tiny tick mark each end ── */
+  body.bg-b .technical-strip {
+    border-top: 1px solid rgba(31, 53, 57, 0.18);
+    border-bottom: 1px solid rgba(31, 53, 57, 0.18);
+    background: rgba(253, 252, 248, 0.62);
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     BG TREATMENT C — Animated gradient mesh
+  ═══════════════════════════════════════════════════════════════════ */
+  body.bg-c {
+    background: #FCFAF5;
+    --bg:        #FCFAF5;
+    --bg-soft:   #FFFFFF;
+    --surface:   #FFFFFF;
+    --surface-2: #FFFFFF;
+  }
+  body.bg-c .mesh {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  body.bg-c .mesh-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    will-change: transform;
+  }
+  body.bg-c .mesh-1 {
+    width: 50vw; height: 50vw; max-width: 700px; max-height: 700px;
+    top: -10%; right: -15%;
+    background: radial-gradient(circle, rgba(127, 160, 138, 0.55) 0%, transparent 70%);
+    animation: drift1 24s ease-in-out infinite alternate;
+  }
+  body.bg-c .mesh-2 {
+    width: 45vw; height: 45vw; max-width: 600px; max-height: 600px;
+    bottom: -10%; left: -10%;
+    background: radial-gradient(circle, rgba(181, 137, 90, 0.5) 0%, transparent 70%);
+    animation: drift2 28s ease-in-out infinite alternate;
+  }
+  body.bg-c .mesh-3 {
+    width: 30vw; height: 30vw; max-width: 420px; max-height: 420px;
+    top: 50%; left: 40%;
+    background: radial-gradient(circle, rgba(199, 111, 78, 0.32) 0%, transparent 70%);
+    animation: drift3 32s ease-in-out infinite alternate;
+  }
+  @keyframes drift1 { from { transform: translate(0, 0) scale(1); } to { transform: translate(-8vw, 6vw) scale(1.1); } }
+  @keyframes drift2 { from { transform: translate(0, 0) scale(1); } to { transform: translate(6vw, -4vw) scale(0.95); } }
+  @keyframes drift3 { from { transform: translate(0, 0) scale(1); } to { transform: translate(-4vw, -6vw) scale(1.15); } }
+
+  /* Grain still applied for tactility */
+  body.bg-c::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.10;
+    mix-blend-mode: multiply;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     BG TREATMENT D — Dot grid + sharp elevation
+  ═══════════════════════════════════════════════════════════════════ */
+  body.bg-d {
+    background-color: #FBFAF6;
+    --bg:        #FBFAF6;
+    --bg-soft:   #FDFCF8;
+    --surface:   #FFFFFF;
+    --surface-2: #FFFFFF;
+    background-image: radial-gradient(circle, rgba(31, 53, 57, 0.18) 1.2px, transparent 1.2px);
+    background-size: 24px 24px;
+    background-position: 0 0;
+    background-attachment: fixed;
+  }
+  body.bg-d::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    opacity: 0.08;
+    mix-blend-mode: multiply;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     BG TREATMENT E — Drafting paper lines
+  ═══════════════════════════════════════════════════════════════════ */
+  body.bg-e {
+    background-color: #FAF7F0;
+    --bg:        #FAF7F0;
+    --bg-soft:   #FCFAF5;
+    --surface:   #FFFFFF;
+    --surface-2: #FFFFFF;
+    background-image:
+      linear-gradient(to bottom, rgba(31, 53, 57, 0.06) 1px, transparent 1px);
+    background-size: 100% 32px;
+    background-attachment: fixed;
+  }
+  body.bg-e::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.14;
+    mix-blend-mode: multiply;
+  }
+  /* Vertical accent line every section */
+  body.bg-e::after {
+    content: '';
+    position: fixed;
+    top: 0; bottom: 0;
+    left: clamp(20px, 4vw, 40px);
+    width: 1px;
+    background: rgba(31, 53, 57, 0.07);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     SHARED TYPE SYSTEM
+  ═══════════════════════════════════════════════════════════════════ */
+  .display-1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(40px, 7vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+  }
+  .display-2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+  }
+  em.accent {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sage-deep);
+    font-variation-settings: "opsz" 144, "SOFT" 80;
+    letter-spacing: -0.04em;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(11px, 1vw, 12px);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--ink-soft);
+  }
+
+  /* ─── BUTTONS ─── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    border: 1px solid transparent;
+    line-height: 1;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg-soft);
+    border-color: var(--ink);
+    box-shadow: var(--shadow-soft);
+  }
+  .btn-primary:hover {
+    background: var(--ink-2);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px -10px rgba(31, 53, 57, 0.45);
+  }
+  .btn-primary svg { transition: transform 0.25s; }
+  .btn-primary:hover svg { transform: translateX(3px); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--hairline-2); }
+  .btn-ghost:hover { background: var(--surface); border-color: var(--ink-soft); }
+  .btn-large { padding: 17px 28px; font-size: 16px; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     NAV
+  ═══════════════════════════════════════════════════════════════════ */
+  nav.site-nav {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--hairline);
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  body.bg-a nav.site-nav { background: rgba(250, 247, 240, 0.85); }
+  body.bg-b nav.site-nav { background: rgba(251, 250, 246, 0.88); }
+  body.bg-c nav.site-nav { background: rgba(252, 250, 245, 0.78); }
+  body.bg-d nav.site-nav { background: rgba(251, 250, 246, 0.88); }
+  body.bg-e nav.site-nav { background: rgba(250, 247, 240, 0.88); }
+
+  .nav-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .logo { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+  .logo-mark { width: 36px; height: 36px; color: var(--ink); }
+  .logo-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: -0.015em;
+    font-variation-settings: "opsz" 96, "SOFT" 50;
+  }
+  .logo-text em { font-style: italic; font-weight: 300; color: var(--sage-deep); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    transition: color 0.2s;
+    padding: 8px 0;
+  }
+  .nav-links a:hover { color: var(--sage-deep); }
+  .nav-links a .num { color: var(--ink-mute); margin-right: 6px; font-weight: 400; }
+  .nav-actions { display: flex; gap: 10px; align-items: center; }
+  .nav-actions .signin {
+    font-size: 14px;
+    color: var(--ink);
+    padding: 10px 6px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .nav-actions .signin:hover { border-bottom-color: var(--ink); }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     HERO
+  ═══════════════════════════════════════════════════════════════════ */
+  .hero {
+    padding: clamp(48px, 8vw, 96px) 0 clamp(60px, 9vw, 110px);
+    position: relative;
+    overflow: hidden;
+  }
+  /* Hero blobs only on bg-a (other treatments have their own atmospheric layer) */
+  body.bg-a .hero::before {
+    content: '';
+    position: absolute;
+    top: -10%; right: -20%;
+    width: 70vw; height: 70vw;
+    max-width: 900px; max-height: 900px;
+    background: radial-gradient(circle, rgba(127, 160, 138, 0.18) 0%, transparent 60%);
+    pointer-events: none; z-index: 0;
+  }
+  body.bg-a .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -25%; left: -15%;
+    width: 60vw; height: 60vw;
+    max-width: 720px; max-height: 720px;
+    background: radial-gradient(circle, rgba(181, 137, 90, 0.12) 0%, transparent 60%);
+    pointer-events: none; z-index: 0;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-copy h1 { margin-bottom: clamp(20px, 2.5vw, 28px); margin-top: 24px; }
+  .hero-copy .subhead {
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin-bottom: clamp(28px, 3.5vw, 40px);
+  }
+  .hero-copy .subhead strong { color: var(--ink); font-weight: 600; }
+
+  .hero-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 22px;
+  }
+  .hero-micro {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-weight: 500;
+    flex-wrap: wrap;
+  }
+  .hero-micro .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--sage);
+    box-shadow: 0 0 0 4px rgba(127, 160, 138, 0.22);
+    flex-shrink: 0;
+  }
+
+  /* Photo */
+  .hero-visual { position: relative; width: 100%; }
+  .frame {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-hero);
+    transform: rotate(0.8deg);
+    border: 1px solid rgba(255,255,255,0.6);
+    background: var(--surface);
+  }
+  .frame-meta {
+    position: absolute;
+    top: 14px; left: 14px;
+    z-index: 5;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: rgba(255,255,255,0.95);
+    background: rgba(31, 53, 57, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .live-dot {
+    width: 6px; height: 6px;
+    background: var(--terra);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(199, 111, 78, 0.6); }
+    50%      { opacity: 0.6; box-shadow: 0 0 0 6px rgba(199, 111, 78, 0); }
+  }
+
+  .img-layer { position: absolute; inset: 0; background-size: cover; background-position: center; }
+  .img-empty { background-color: #C9C2B6; background-image: url("https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80"); }
+  .img-staged { background-color: #B5A992; background-image: url("https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1600&q=80"); clip-path: inset(0 0 0 0%); }
+
+  .divider {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    transform: translateX(-1px);
+    z-index: 4;
+    pointer-events: none;
+  }
+  .handle {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--bg-soft);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 8px 24px -6px rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    cursor: ew-resize;
+    color: var(--ink);
+  }
+
+  .img-tag {
+    position: absolute;
+    bottom: 14px;
+    z-index: 4;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: rgba(31, 53, 57, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: rgba(255,255,255,0.95);
+    padding: 6px 10px;
+    border-radius: 4px;
+  }
+  .img-tag.left { left: 14px; }
+  .img-tag.right { right: 14px; }
+
+  .stat {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid rgba(255,255,255,0.7);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    box-shadow: var(--shadow-card);
+    z-index: 6;
+  }
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(26px, 3vw, 34px);
+    line-height: 1;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144, "SOFT" 40;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+  }
+  .stat-num .small {
+    font-size: 0.5em;
+    color: var(--sage-deep);
+    font-style: italic;
+    font-weight: 300;
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .stat-source {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-mute);
+    margin-top: 6px;
+    border-top: 1px solid var(--hairline);
+    padding-top: 6px;
+    white-space: nowrap;
+  }
+  .stat.tl { top: 16px; right: 16px; }
+  .stat.br { bottom: 60px; left: 16px; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     TECHNICAL STRIP
+  ═══════════════════════════════════════════════════════════════════ */
+  .technical-strip {
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    padding: 18px 0;
+    position: relative;
+    z-index: 1;
+    background: var(--bg-soft);
+  }
+  .strip-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .strip-row span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .strip-row span::before {
+    content: '';
+    width: 5px; height: 5px;
+    background: var(--sage);
+    border-radius: 50%;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     COMPARISON · 4 cards, dark bg
+  ═══════════════════════════════════════════════════════════════════ */
+  #compare {
+    background: var(--ink);
+    color: #F2EDE0;
+    padding: clamp(72px, 10vw, 130px) 0;
+    position: relative;
+    overflow: hidden;
+  }
+  #compare::before {
+    content: '';
+    position: absolute;
+    top: -20%; right: -10%;
+    width: 60vw; height: 60vw;
+    max-width: 720px; max-height: 720px;
+    background: radial-gradient(circle, rgba(127, 160, 138, 0.16) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  #compare .section-head { max-width: 720px; margin: 0 auto clamp(40px, 6vw, 72px); text-align: center; }
+  #compare .section-head .eyebrow { margin-bottom: 20px; justify-content: center; color: rgba(242, 237, 224, 0.78); }
+  #compare .section-head .eyebrow::before { background: rgba(242, 237, 224, 0.5); }
+  #compare .section-head h2 { color: #F2EDE0; margin-bottom: 16px; }
+  #compare .section-head p { color: rgba(242, 237, 224, 0.72); font-size: clamp(15px, 1.3vw, 18px); }
+
+  .compare-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(16px, 1.8vw, 22px);
+    align-items: stretch;
+    position: relative;
+    z-index: 1;
+  }
+  .compare-card {
+    background: rgba(251, 248, 240, 0.04);
+    border: 1px solid rgba(251, 248, 240, 0.13);
+    border-radius: var(--radius-lg);
+    padding: clamp(22px, 2.4vw, 30px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* Entrance state — observer adds .in-view to release */
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+      background 0.3s ease;
+  }
+  .compare-card.in-view { opacity: 1; transform: translateY(0); }
+  .compare-card.featured.in-view { transform: translateY(-12px); }
+  @media (max-width: 1100px) {
+    .compare-card.featured.in-view { transform: translateY(0); }
+  }
+  .compare-card:not(.featured).in-view:hover {
+    background: rgba(251, 248, 240, 0.07);
+    transform: translateY(-3px);
+  }
+  .compare-card.featured {
+    background: #F2EDE0;
+    border-color: #F2EDE0;
+    color: var(--ink);
+    box-shadow: var(--shadow-card);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .compare-card { opacity: 1; transform: none !important; transition: background 0.3s ease; }
+    .compare-card.featured.in-view { transform: translateY(-12px) !important; }
+    @media (max-width: 1100px) {
+      .compare-card.featured.in-view { transform: translateY(0) !important; }
+    }
+  }
+
+  .compare-card .badge-fast {
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    background: var(--sage);
+    color: #F7F3E9;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding: 6px 11px;
+    border-radius: 999px;
+  }
+  .compare-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(20px, 1.8vw, 26px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 14px;
+    font-variation-settings: "opsz" 96, "SOFT" 30;
+  }
+  .compare-price {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+    font-family: 'Fraunces', serif;
+    font-size: clamp(22px, 2.4vw, 30px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144, "SOFT" 40;
+    line-height: 1.1;
+  }
+  .compare-card.featured .compare-price em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sage-deep);
+    font-variation-settings: "opsz" 144, "SOFT" 80;
+  }
+  .compare-price .per {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    color: currentColor;
+    opacity: 0.65;
+    font-style: normal;
+    font-weight: 400;
+  }
+  .compare-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin-bottom: 22px;
+    color: currentColor;
+    opacity: 0.78;
+  }
+  .compare-list { list-style: none; padding: 0; margin: 0 0 20px; flex: 1; }
+  .compare-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 7px 0;
+    font-size: 14px;
+    color: currentColor;
+    opacity: 0.88;
+    line-height: 1.45;
+  }
+  .compare-list li::before {
+    content: '';
+    width: 14px; height: 14px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 7l3 3 5-7' stroke='%237FA08A' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+  .compare-list.cons li::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M4 4l6 6M10 4l-6 6' stroke='%23C76F4E' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+  .compare-card.featured .compare-list li::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 7l3 3 5-7' stroke='%235A7E68' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+  .compare-tagline {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid rgba(251, 248, 240, 0.16);
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 14.5px;
+    opacity: 0.82;
+    font-variation-settings: "opsz" 36, "SOFT" 80;
+    line-height: 1.4;
+  }
+  .compare-card.featured .compare-tagline {
+    border-top-color: var(--hairline);
+    color: var(--ink-soft);
+    opacity: 1;
+  }
+  .compliance-note {
+    margin-top: 40px;
+    padding: 18px 22px;
+    background: rgba(251, 248, 240, 0.06);
+    border: 1px solid rgba(251, 248, 240, 0.10);
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    text-align: center;
+    color: rgba(242, 237, 224, 0.82);
+    position: relative;
+    z-index: 1;
+    line-height: 1.55;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     BG SWITCHER (the demo control)
+  ═══════════════════════════════════════════════════════════════════ */
+  .bg-switcher {
+    position: fixed;
+    top: 18px; right: 18px;
+    z-index: 200;
+    background: rgba(31, 53, 57, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 260px;
+    box-shadow: 0 16px 32px -8px rgba(0,0,0,0.3);
+  }
+  .bg-switcher-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(255,255,255,0.55);
+    padding: 6px 10px 4px;
+  }
+  .bg-switcher button {
+    text-align: left;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.88);
+    transition: background 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.2;
+  }
+  .bg-switcher button:hover { background: rgba(255,255,255,0.06); }
+  .bg-switcher button.active { background: var(--sage); color: #1F3539; }
+  .bg-switcher button .key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+  }
+  .bg-switcher button.active .key { color: rgba(31, 53, 57, 0.6); }
+  .bg-switcher button .name { flex: 1; }
+  .bg-switcher button .pick {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--sage);
+    padding: 2px 6px;
+    border: 1px solid var(--sage);
+    border-radius: 4px;
+  }
+  .bg-switcher button.active .pick {
+    color: rgba(31, 53, 57, 0.7);
+    border-color: rgba(31, 53, 57, 0.3);
+  }
+
+  @media (max-width: 720px) {
+    .bg-switcher {
+      top: 12px; right: 12px;
+      max-width: calc(100vw - 24px);
+    }
+    .bg-switcher button { font-size: 11.5px; padding: 7px 10px; }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     RESPONSIVE
+  ═══════════════════════════════════════════════════════════════════ */
+  @media (max-width: 1100px) {
+    .compare-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+    .hero-visual { max-width: 640px; margin: 0 auto; }
+    .frame { transform: rotate(0); }
+  }
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+    .nav-actions .signin { display: none; }
+    .nav-actions .btn { display: none; }
+    .hero-cta { flex-direction: column; align-items: stretch; }
+    .hero-cta .btn { width: 100%; }
+    .stat.tl { top: 12px; right: 12px; padding: 10px 14px; }
+    .stat.br { bottom: 50px; left: 12px; padding: 10px 14px; }
+    .strip-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .strip-row span { font-size: 11px; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .compare-card.featured { order: -1; }
+  }
+  @media (max-width: 420px) {
+    .stat-source { display: none; }
+    .stat.tl { top: 10px; right: 10px; }
+    .stat.br { bottom: 46px; left: 10px; }
+    .frame-meta { font-size: 10px; }
+    .img-tag { font-size: 10px; padding: 5px 8px; }
+    body.bg-b::after { display: none; } /* hide tiny corner mark on mobile */
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  /* Entrance fades */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.18s; }
+  .d3 { animation-delay: 0.32s; }
+  .d4 { animation-delay: 0.46s; }
+  .d5 { animation-delay: 0.6s; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     SHARED SECTION
+  ═══════════════════════════════════════════════════════════════════ */
+  .section {
+    padding: clamp(72px, 10vw, 130px) 0;
+    position: relative;
+    z-index: 1;
+  }
+  .section.alt { background: var(--bg-soft); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+  .section-head {
+    max-width: 760px;
+    margin: 0 auto clamp(48px, 6vw, 80px);
+    text-align: center;
+  }
+  .section-head .eyebrow { margin-bottom: 22px; justify-content: center; }
+  .section-head h2 { margin-bottom: 18px; }
+  .section-head p { font-size: clamp(15px, 1.3vw, 18px); color: var(--ink-soft); max-width: 580px; margin: 0 auto; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     HOW IT WORKS
+  ═══════════════════════════════════════════════════════════════════ */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(20px, 3vw, 36px);
+  }
+  .step { display: flex; flex-direction: column; }
+  .step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .step-num .terra { color: var(--terra); font-weight: 600; }
+  .step-num::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: var(--sage);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .step.us .step-num::before { background: var(--terra); }
+  .step-thumb {
+    aspect-ratio: 4 / 3;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--sage-soft, #C8D4CC);
+    border: 1px solid var(--hairline-2);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+  .step-thumb.t1 { background-image: linear-gradient(135deg, rgba(127, 160, 138, 0.18), rgba(31, 53, 57, 0.10)), url("https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=900&q=80"); }
+  .step-thumb.t2 { background-image: linear-gradient(135deg, rgba(127, 160, 138, 0.42), rgba(31, 53, 57, 0.32)), url("https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=900&q=80"); }
+  .step-thumb.t3 { background-image: linear-gradient(135deg, rgba(199, 111, 78, 0.12), rgba(31, 53, 57, 0.06)), url("https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80"); }
+  .step-thumb.t4 { background-image: url("https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=900&q=80"); }
+  .step-thumb .ovl {
+    position: absolute;
+    bottom: 10px; right: 10px;
+    background: rgba(31, 53, 57, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: rgba(255,255,255,0.95);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding: 5px 9px;
+    border-radius: 4px;
+  }
+  .step h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(20px, 1.8vw, 24px);
+    line-height: 1.2;
+    margin-bottom: 8px;
+    color: var(--ink);
+    font-variation-settings: "opsz" 96, "SOFT" 30;
+  }
+  .step .who {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-mute);
+    margin-bottom: 12px;
+  }
+  body.bg-b .step.us .who { color: var(--terra); }
+  .step p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.55; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     STYLES SHOWCASE
+  ═══════════════════════════════════════════════════════════════════ */
+  .room-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: clamp(28px, 4vw, 40px);
+  }
+  .room-pill {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--hairline-2);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .room-pill:hover { border-color: var(--ink-soft); color: var(--ink); }
+  .room-pill.active {
+    background: var(--ink);
+    color: var(--bg-soft);
+    border-color: var(--ink);
+  }
+  body.bg-b .room-pill.active {
+    background: var(--terra);
+    border-color: var(--terra);
+    color: #FBFAF6;
+  }
+  .styles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(14px, 1.8vw, 22px);
+  }
+  .style-card {
+    aspect-ratio: 4 / 5;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s;
+    border: 1px solid rgba(31, 53, 57, 0.08);
+    background-size: cover;
+    background-position: center;
+  }
+  .style-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+  .style-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(31, 53, 57, 0.85) 0%, rgba(31, 53, 57, 0.10) 45%, rgba(31, 53, 57, 0) 70%);
+  }
+  .style-card .meta {
+    position: absolute;
+    bottom: 16px; left: 16px; right: 16px;
+    z-index: 1;
+    color: #F7F3E9;
+  }
+  .style-card .meta .name {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(18px, 1.6vw, 22px);
+    font-weight: 400;
+    margin-bottom: 4px;
+    font-variation-settings: "opsz" 96, "SOFT" 40;
+    letter-spacing: -0.01em;
+  }
+  .style-card .meta .desc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(247, 243, 233, 0.78);
+    line-height: 1.4;
+  }
+  /* Per-style gradient palettes — sourced from STYLE_PALETTES */
+  .s-modern    { background: linear-gradient(135deg, #1a1a1a 0%, #8a8887 100%); }
+  .s-scandi    { background: linear-gradient(135deg, #e8e1d4 0%, #8c7b66 100%); }
+  .s-coastal   { background: linear-gradient(135deg, #cfe1ec 0%, #9cb8c9 100%); }
+  .s-hamptons  { background: linear-gradient(135deg, #1e2a44 0%, #a68a5a 100%); }
+  .s-luxury    { background: linear-gradient(135deg, #111111 0%, #6a5a3c 100%); }
+  .s-farmhouse { background: linear-gradient(135deg, #f5efe3 0%, #6e5840 100%); }
+  .s-midcentury{ background: linear-gradient(135deg, #a55a2a 0%, #2c3e2d 100%); }
+  .s-industrial{ background: linear-gradient(135deg, #2a2a28 0%, #a0745a 100%); }
+  .s-minimalist{ background: linear-gradient(135deg, #f8f8f6 0%, #2a2a28 100%); }
+  .s-australian{ background: linear-gradient(135deg, #d9c6a6 0%, #2a2a28 100%); }
+  .s-japandi   { background: linear-gradient(135deg, #c8b89a 0%, #2a2a2a 100%); }
+  .s-boho      { background: linear-gradient(135deg, #c97c4a 0%, #6a5238 100%); }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     PRICING
+  ═══════════════════════════════════════════════════════════════════ */
+  .pricing-toggle-wrap { text-align: center; margin-bottom: clamp(36px, 5vw, 56px); }
+  .pricing-toggle {
+    display: inline-flex;
+    background: var(--surface);
+    border: 1px solid var(--hairline-2);
+    border-radius: 999px;
+    padding: 4px;
+  }
+  .pricing-toggle button {
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    transition: all 0.2s;
+  }
+  .pricing-toggle button.active {
+    background: var(--ink);
+    color: var(--bg-soft);
+  }
+  body.bg-b .pricing-toggle button.active { background: var(--terra); color: #FBFAF6; }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(16px, 2vw, 22px);
+  }
+  .pricing-grid.monthly { grid-template-columns: repeat(2, 1fr); max-width: 720px; margin: 0 auto; }
+
+  .price-card {
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    padding: clamp(26px, 3vw, 34px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s, border-color 0.35s;
+  }
+  .price-card:not(.featured):hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card);
+    border-color: var(--hairline-2);
+  }
+  .price-card.featured {
+    background: var(--ink);
+    color: #F2EDE0;
+    border-color: var(--ink);
+    box-shadow: var(--shadow-card);
+  }
+  body.bg-b .price-card.featured {
+    box-shadow: inset 0 3px 0 0 var(--terra), var(--shadow-card);
+  }
+  .price-card .badge {
+    position: absolute;
+    top: -12px; right: 22px;
+    background: var(--sage);
+    color: #F2EDE0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding: 6px 11px;
+    border-radius: 999px;
+  }
+  body.bg-b .price-card .badge { background: var(--terra); }
+  .price-card .tier-name {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 400;
+    margin-bottom: 4px;
+    font-variation-settings: "opsz" 96, "SOFT" 30;
+    letter-spacing: -0.01em;
+  }
+  .price-card .tier-tag {
+    font-size: 13px;
+    color: currentColor;
+    opacity: 0.7;
+    margin-bottom: 22px;
+    min-height: 2.6em;
+  }
+  .price-card .price {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(34px, 3.6vw, 44px);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin-bottom: 6px;
+    font-variation-settings: "opsz" 144, "SOFT" 40;
+  }
+  .price-card .price .per {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: currentColor;
+    opacity: 0.6;
+    letter-spacing: 0;
+    margin-left: 4px;
+  }
+  .price-card .credits {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    opacity: 0.78;
+    margin-bottom: 22px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .price-card.featured .credits { border-bottom-color: rgba(247, 243, 233, 0.16); }
+  .price-card .rooms {
+    font-size: 14px;
+    color: currentColor;
+    opacity: 0.85;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .price-card .note {
+    font-size: 12.5px;
+    color: currentColor;
+    opacity: 0.65;
+    margin-bottom: 24px;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .price-card .btn {
+    margin-top: auto;
+    width: 100%;
+    justify-content: center;
+  }
+  .price-card.featured .btn-primary {
+    background: #F2EDE0;
+    color: var(--ink);
+    border-color: #F2EDE0;
+  }
+  .price-card.featured .btn-primary:hover {
+    background: var(--sage);
+    color: #1F3539;
+    border-color: var(--sage);
+  }
+  body.bg-b .price-card.featured .btn-primary:hover {
+    background: var(--terra);
+    color: #FBFAF6;
+    border-color: var(--terra);
+  }
+
+  .credits-info {
+    margin-top: 36px;
+    padding: 22px 26px;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    text-align: center;
+  }
+  .credits-info strong { color: var(--ink); font-weight: 500; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     FAQ
+  ═══════════════════════════════════════════════════════════════════ */
+  .faq-list { max-width: 820px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--hairline); }
+  .faq-item:first-child { border-top: 1px solid var(--hairline); }
+  .faq-item summary {
+    padding: 26px 0;
+    font-family: 'Fraunces', serif;
+    font-size: clamp(18px, 1.7vw, 22px);
+    font-weight: 400;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    font-variation-settings: "opsz" 48, "SOFT" 30;
+    transition: color 0.2s;
+  }
+  .faq-item summary:hover { color: var(--terra); }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary::after {
+    content: '';
+    width: 14px; height: 14px;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M7 3v8M3 7h8' stroke='%231F3539' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+  body.bg-b .faq-item summary::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M7 3v8M3 7h8' stroke='%23C76F4E' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+  .faq-item[open] summary::after { transform: rotate(45deg); }
+  .faq-item .answer {
+    padding: 0 0 26px;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    max-width: 90%;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     FINAL CTA
+  ═══════════════════════════════════════════════════════════════════ */
+  .final-cta {
+    text-align: center;
+    padding: clamp(72px, 12vw, 130px) 32px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--hairline-2);
+    background: linear-gradient(135deg, var(--surface) 0%, var(--bg-soft) 60%, var(--surface) 100%);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+  body.bg-b .final-cta {
+    border-top: 2px solid var(--terra);
+  }
+  .final-cta::before {
+    content: '';
+    position: absolute;
+    top: -30%; right: -20%;
+    width: 50vw; height: 50vw;
+    max-width: 600px; max-height: 600px;
+    background: radial-gradient(circle, rgba(127, 160, 138, 0.16) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  body.bg-b .final-cta::before { background: radial-gradient(circle, rgba(199, 111, 78, 0.12) 0%, transparent 65%); }
+  .final-cta h2 { margin-bottom: 18px; position: relative; z-index: 1; }
+  .final-cta p {
+    max-width: 540px;
+    margin: 0 auto 32px;
+    color: var(--ink-soft);
+    font-size: 16px;
+    position: relative;
+    z-index: 1;
+  }
+  .final-cta .btn { position: relative; z-index: 1; }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════════════════════════════════ */
+  footer.site-foot {
+    padding: 64px 0 32px;
+    border-top: 1px solid var(--hairline);
+    margin-top: clamp(64px, 9vw, 100px);
+    position: relative;
+    z-index: 1;
+    background: var(--bg);
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: clamp(28px, 4vw, 56px);
+    margin-bottom: 48px;
+  }
+  .foot-about { max-width: 320px; }
+  .foot-about p {
+    margin-top: 16px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .foot-col h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+    margin-bottom: 18px;
+  }
+  .foot-col ul { list-style: none; padding: 0; }
+  .foot-col li { margin-bottom: 10px; }
+  .foot-col a {
+    font-size: 14px;
+    color: var(--ink-soft);
+    transition: color 0.2s;
+  }
+  .foot-col a:hover { color: var(--ink); }
+  body.bg-b .foot-col a:hover { color: var(--terra); }
+  .foot-bottom {
+    padding-top: 24px;
+    border-top: 1px solid var(--hairline);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--ink-mute);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════
+     RESPONSIVE — new sections
+  ═══════════════════════════════════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    .styles-grid { grid-template-columns: repeat(3, 1fr); }
+    .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    .foot-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+    .foot-about { grid-column: span 3; max-width: 480px; margin-bottom: 16px; }
+  }
+  @media (max-width: 720px) {
+    .steps { grid-template-columns: 1fr; gap: 36px; }
+    .styles-grid { grid-template-columns: repeat(2, 1fr); }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .pricing-grid.monthly { grid-template-columns: 1fr; max-width: 420px; }
+    .price-card.featured { order: -1; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .foot-about { grid-column: span 2; }
+    .foot-bottom { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body class="bg-b">
+
+<!-- BG SWITCHER -->
+<div class="bg-switcher" role="radiogroup" aria-label="Background treatment">
+  <div class="bg-switcher-label">Background treatment</div>
+  <button data-bg="a"><span class="key">A</span><span class="name">Layered warm-white</span></button>
+  <button data-bg="b" class="active"><span class="key">B</span><span class="name">Architectural blueprint</span><span class="pick">Pick</span></button>
+  <button data-bg="c"><span class="key">C</span><span class="name">Animated gradient mesh</span></button>
+  <button data-bg="d"><span class="key">D</span><span class="name">Dot grid (Vercel)</span></button>
+  <button data-bg="e"><span class="key">E</span><span class="name">Drafting paper lines</span></button>
+</div>
+
+<!-- BG-C only — animated mesh layer -->
+<div class="mesh">
+  <div class="mesh-blob mesh-1"></div>
+  <div class="mesh-blob mesh-2"></div>
+  <div class="mesh-blob mesh-3"></div>
+</div>
+
+<!-- BG-B only — fixed depth blobs behind the grid for parallax warmth -->
+<div class="depth-blobs" aria-hidden="true">
+  <div class="db db-1"></div>
+  <div class="db db-2"></div>
+  <div class="db db-3"></div>
+</div>
+
+<!-- BG-B only — architectural drawing title block (bottom-right, fixed) -->
+<aside class="title-block" aria-hidden="true">
+  <div class="row head"><span>STAGERIGHT</span><span class="terra">REV 02</span></div>
+  <div class="row"><span class="k">DWG</span><span class="v">SR-001</span></div>
+  <div class="row"><span class="k">SCALE</span><span class="v">NTS</span></div>
+  <div class="row"><span class="k">DATE</span><span class="v">05.2026</span></div>
+  <div class="row"><span class="k">DRAWN</span><span class="v">DR.AI</span></div>
+</aside>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <div class="wrap">
+    <div class="nav-row">
+      <a href="#" class="logo" aria-label="StageRight home">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32 4 L56 18 L56 46 L32 60 L8 46 L8 18 Z" stroke-width="1.6"/>
+          <path d="M32 9.5 L51 21 L51 43 L32 54.5 L13 43 L13 21 Z" stroke-width="1.2"/>
+          <rect x="18.5" y="22" width="9" height="13" stroke-width="1.2"/>
+          <line x1="23" y1="22" x2="23" y2="35" stroke-width="1.2"/>
+          <line x1="18.5" y1="28.5" x2="27.5" y2="28.5" stroke-width="1.2"/>
+          <path d="M32 32 L46 32 Q47.5 32 47.5 33.5 L47.5 41 L30.5 41 L30.5 33.5 Q30.5 32 32 32 Z" stroke-width="1.3"/>
+          <line x1="32" y1="41" x2="32" y2="45" stroke-width="1.2"/>
+          <line x1="46" y1="41" x2="46" y2="45" stroke-width="1.2"/>
+          <line x1="14" y1="46" x2="50" y2="46" stroke-width="1"/>
+        </svg>
+        <span class="logo-text">Stage<em>Right</em></span>
+      </a>
+      <div class="nav-links">
+        <a href="#"><span class="num">01</span>How it works</a>
+        <a href="#"><span class="num">02</span>Styles</a>
+        <a href="#"><span class="num">03</span>Pricing</a>
+        <a href="#"><span class="num">04</span>FAQ</a>
+      </div>
+      <div class="nav-actions">
+        <a href="#" class="signin">Sign in</a>
+        <a href="#" class="btn btn-primary">
+          Get started
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+
+      <div class="hero-copy">
+        <span class="eyebrow fade-up d1"><span class="sec-num">01</span>Virtual staging · for real estate</span>
+        <h1 class="display-1 fade-up d2">
+          Photorealistic<br/>
+          <em class="accent">staging,</em> ready<br/>
+          in <em class="accent">about a minute.</em>
+        </h1>
+        <p class="subhead fade-up d3">
+          Upload an empty or furnished room. Pick a style. Get a <strong>full-resolution staged photo</strong> back in roughly sixty seconds — twelve curated interior styles, ready to list.
+        </p>
+        <div class="hero-cta fade-up d4">
+          <a href="#" class="btn btn-primary btn-large">
+            Start with 14 free credits
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#" class="btn btn-ghost btn-large">See how it works</a>
+        </div>
+        <div class="hero-micro fade-up d5">
+          <span class="dot"></span>
+          <span>No credit card · Earn a free credit every 7 you spend</span>
+        </div>
+      </div>
+
+      <div class="hero-visual fade-up d3">
+        <div class="frame" id="frame">
+          <div class="frame-meta">
+            <span class="live-dot"></span>Live preview · Hamptons style
+          </div>
+          <div class="img-layer img-empty"></div>
+          <div class="img-layer img-staged" id="staged"></div>
+          <div class="divider" id="divider"></div>
+          <div class="handle" id="handle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/>
+            </svg>
+          </div>
+          <div class="img-tag left">Empty</div>
+          <div class="img-tag right">Staged</div>
+          <div class="stat tl">
+            <div class="stat-num">~60<span class="small">s</span></div>
+            <div class="stat-label">First image</div>
+            <div class="stat-source">Typical render</div>
+          </div>
+          <div class="stat br">
+            <div class="stat-num">$0.73<span class="small">AUD</span></div>
+            <div class="stat-label">From, per image</div>
+            <div class="stat-source">At the Bulk pack</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TECHNICAL STRIP -->
+<div class="technical-strip">
+  <div class="wrap strip-row">
+    <span>No credit card required</span>
+    <span>Free credit every 7 you spend</span>
+    <span>GST inclusive · AUD</span>
+  </div>
+</div>
+
+<!-- COMPARISON -->
+<section id="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><span class="sec-num">02</span>Why StageRight</span>
+      <h2 class="display-2">Four ways to stage a listing.<br/>Only one is built for the <em class="accent">job.</em></h2>
+      <p>Side by side, the actual numbers.</p>
+    </div>
+
+    <div class="compare-grid">
+
+      <div class="compare-card">
+        <h3>Physical staging</h3>
+        <div class="compare-price">$2,300–$3,200 <span class="per">/ home</span></div>
+        <div class="compare-time">Turnaround · weeks</div>
+        <ul class="compare-list cons">
+          <li>Requires vacant property</li>
+          <li>Furniture rental + delivery</li>
+          <li>Schedule stylists + movers</li>
+          <li>Photo shoot after setup</li>
+          <li>Restage = full re-do</li>
+        </ul>
+        <div class="compare-tagline">Real furniture, real time, real cost.</div>
+      </div>
+
+      <div class="compare-card">
+        <h3>Human-edit virtual</h3>
+        <div class="compare-price">$20–$30 <span class="per">/ image</span></div>
+        <div class="compare-time">Turnaround · 24–48 hours</div>
+        <ul class="compare-list cons">
+          <li>Editors handle each photo manually</li>
+          <li>Limited revisions per purchase</li>
+          <li>Queue times on weekends</li>
+          <li>Style options vary by provider</li>
+          <li>Per-image pricing only</li>
+        </ul>
+        <div class="compare-tagline">Handcrafted, but slow and per-piece.</div>
+      </div>
+
+      <div class="compare-card">
+        <h3>General AI tools</h3>
+        <div class="compare-price">$0–$20 <span class="per">/ month</span></div>
+        <div class="compare-time">Turnaround · trial &amp; error</div>
+        <ul class="compare-list cons">
+          <li>Built for art, not real estate</li>
+          <li>Distorts walls, windows, doors</li>
+          <li>Furniture floats, scale is wrong</li>
+          <li>Needs prompt engineering know-how</li>
+          <li>No saved styles, no consistency</li>
+        </ul>
+        <div class="compare-tagline">Cheap — but the room you get isn't yours.</div>
+      </div>
+
+      <div class="compare-card featured">
+        <span class="badge-fast">Built for staging</span>
+        <h3>StageRight AI</h3>
+        <div class="compare-price">From <em>$0.73</em> <span class="per">AUD / image</span></div>
+        <div class="compare-time">Turnaround · under a minute</div>
+        <ul class="compare-list">
+          <li>Preserves your room exactly</li>
+          <li>Twelve curated interior styles</li>
+          <li>Photorealistic, full resolution</li>
+          <li>Free credit every 7 you spend</li>
+          <li>Credits never expire while active</li>
+        </ul>
+        <div class="compare-tagline">Purpose-built. The right room, just furnished.</div>
+      </div>
+
+    </div>
+
+    <div class="compliance-note">
+      Virtual staging must be disclosed in listings. Label images as &ldquo;virtually staged&rdquo; — standard practice across REIA (AU), NAR (US) and REBBA (CA).
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how-it-works">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><span class="sec-num">03</span>How it works</span>
+      <h2 class="display-2">Photo to listing-ready<br/>in <em class="accent">about a minute.</em></h2>
+      <p>You do two small things. We do the two big ones.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num"><span class="terra">01</span> · YOU</div>
+        <div class="step-thumb t1"><span class="ovl">Photo to stage</span></div>
+        <h3>Upload</h3>
+        <div class="who">~5 seconds</div>
+        <p>Drop in any photo of the room — furnished or empty, doesn't matter. Phone or camera. That's the whole step.</p>
+      </div>
+      <div class="step us">
+        <div class="step-num"><span class="terra">02</span> · US</div>
+        <div class="step-thumb t2"><span class="ovl">Reading the room…</span></div>
+        <h3>We read the room</h3>
+        <div class="who">~5 seconds</div>
+        <p>Camera angle, light, openings, layout. The thinking that usually takes ten minutes of briefing — done automatically.</p>
+      </div>
+      <div class="step us">
+        <div class="step-num"><span class="terra">03</span> · US</div>
+        <div class="step-thumb t3"><span class="ovl">Staged · 1 of 3</span></div>
+        <h3>We stage it</h3>
+        <div class="who">~60 seconds</div>
+        <p>Three takes per style at full resolution. AI is creative and inconsistent — three takes means you almost always have one you love.</p>
+      </div>
+      <div class="step">
+        <div class="step-num"><span class="terra">04</span> · YOU</div>
+        <div class="step-thumb t4"><span class="ovl">Ready to list</span></div>
+        <h3>Download. Done.</h3>
+        <div class="who">~5 seconds</div>
+        <p>Save the favourite and you're done. No stylists to brief, no movers, no follow-up shoot — and roughly $2,300 still in your pocket.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STYLES -->
+<section class="section alt" id="styles">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><span class="sec-num">04</span>Twelve curated styles</span>
+      <h2 class="display-2">Pick a style.<br/>See the <em class="accent">result.</em></h2>
+      <p>Every style is real StageRight output — no renders, no concept art. Tap any style to preview.</p>
+    </div>
+
+    <div class="room-pills" role="tablist" aria-label="Room type">
+      <button class="room-pill active">Living Room</button>
+      <button class="room-pill">Bedroom</button>
+      <button class="room-pill">Kitchen</button>
+      <button class="room-pill">Bathroom</button>
+      <button class="room-pill">Home Office</button>
+      <button class="room-pill">Outdoor</button>
+    </div>
+
+    <div class="styles-grid">
+      <div class="style-card s-modern"><div class="meta"><div class="name">Modern</div><div class="desc">Clean lines, neutral tones</div></div></div>
+      <div class="style-card s-scandi"><div class="meta"><div class="name">Scandinavian</div><div class="desc">Light wood, soft whites</div></div></div>
+      <div class="style-card s-coastal"><div class="meta"><div class="name">Coastal</div><div class="desc">Light blues, beach-house</div></div></div>
+      <div class="style-card s-hamptons"><div class="meta"><div class="name">Hamptons</div><div class="desc">White, navy, natural timber</div></div></div>
+      <div class="style-card s-luxury"><div class="meta"><div class="name">Luxury</div><div class="desc">Marble, velvet, brass</div></div></div>
+      <div class="style-card s-farmhouse"><div class="meta"><div class="name">Farmhouse</div><div class="desc">Rustic timber, warm whites</div></div></div>
+      <div class="style-card s-midcentury"><div class="meta"><div class="name">Mid-Century</div><div class="desc">Organic curves, retro woods</div></div></div>
+      <div class="style-card s-industrial"><div class="meta"><div class="name">Industrial</div><div class="desc">Exposed metal, urban warehouse</div></div></div>
+      <div class="style-card s-minimalist"><div class="meta"><div class="name">Minimalist</div><div class="desc">Few pieces, negative space</div></div></div>
+      <div class="style-card s-australian"><div class="meta"><div class="name">Contemporary AU</div><div class="desc">Native timber, indoor-outdoor</div></div></div>
+      <div class="style-card s-japandi"><div class="meta"><div class="name">Japandi</div><div class="desc">Warm minimalism, natural texture</div></div></div>
+      <div class="style-card s-boho"><div class="meta"><div class="name">Boho</div><div class="desc">Rattan, layered terracotta</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><span class="sec-num">05</span>Pricing</span>
+      <h2 class="display-2">Buy credits.<br/>Spend them <em class="accent">when you want.</em></h2>
+      <p>1 credit = 1 staged image. Three Takes default — three versions per room, you keep them all. Earn a free credit every 7 you spend.</p>
+    </div>
+
+    <div class="pricing-toggle-wrap">
+      <div class="pricing-toggle" role="tablist" aria-label="Billing cadence">
+        <button class="active" data-mode="onetime">One-time</button>
+        <button data-mode="monthly">Monthly</button>
+      </div>
+    </div>
+
+    <!-- One-time tiers -->
+    <div class="pricing-grid" data-mode="onetime">
+      <div class="price-card">
+        <div class="tier-name">Starter</div>
+        <div class="tier-tag">Try it on a few listings</div>
+        <div class="price">$24.99 <span class="per">AUD</span></div>
+        <div class="credits">20 credits</div>
+        <div class="rooms">10 staged rooms</div>
+        <div class="note">In Three Takes default. Doubles in Single Take.</div>
+        <a href="#" class="btn btn-ghost">Start with Starter</a>
+      </div>
+      <div class="price-card">
+        <div class="tier-name">Plus</div>
+        <div class="tier-tag">A month of active listing work</div>
+        <div class="price">$49.99 <span class="per">AUD</span></div>
+        <div class="credits">50 credits</div>
+        <div class="rooms">25 staged rooms</div>
+        <div class="note">For agents running a steady cadence.</div>
+        <a href="#" class="btn btn-ghost">Get Plus</a>
+      </div>
+      <div class="price-card featured">
+        <span class="badge">Most popular</span>
+        <div class="tier-name">Pro</div>
+        <div class="tier-tag">Running multiple listings at once</div>
+        <div class="price">$99.99 <span class="per">AUD</span></div>
+        <div class="credits">125 credits</div>
+        <div class="rooms">62 staged rooms</div>
+        <div class="note">Still $1,900+ less than staging one home traditionally.</div>
+        <a href="#" class="btn btn-primary">Get Pro</a>
+      </div>
+      <div class="price-card">
+        <div class="tier-name">Bulk</div>
+        <div class="tier-tag">A full quarter of listing work</div>
+        <div class="price">$219.99 <span class="per">AUD</span></div>
+        <div class="credits">300 credits</div>
+        <div class="rooms">150 staged rooms</div>
+        <div class="note">$0.73 per credit — best per-image price.</div>
+        <a href="#" class="btn btn-ghost">Get Bulk</a>
+      </div>
+    </div>
+
+    <!-- Monthly tiers -->
+    <div class="pricing-grid monthly" data-mode="monthly" hidden>
+      <div class="price-card">
+        <div class="tier-name">Monthly 25</div>
+        <div class="tier-tag">A few staged rooms a month</div>
+        <div class="price">$24.99 <span class="per">AUD / mo</span></div>
+        <div class="credits">25 credits / month</div>
+        <div class="rooms">~12 staged rooms / mo</div>
+        <div class="note">Auto-refills monthly. Cancel any time.</div>
+        <a href="#" class="btn btn-ghost">Subscribe</a>
+      </div>
+      <div class="price-card featured">
+        <span class="badge">Best value</span>
+        <div class="tier-name">Monthly 75</div>
+        <div class="tier-tag">A steady listing cadence</div>
+        <div class="price">$69.99 <span class="per">AUD / mo</span></div>
+        <div class="credits">75 credits / month</div>
+        <div class="rooms">~37 staged rooms / mo</div>
+        <div class="note">Lowest per-credit rate on subscriptions.</div>
+        <a href="#" class="btn btn-primary">Subscribe</a>
+      </div>
+    </div>
+
+    <div class="credits-info">
+      <strong>How credits work · </strong>
+      1 credit = 1 staged image at full resolution. Three Takes default uses 2 credits per styled room and gives you three versions to choose from. Earn 1 free credit every 7 you spend — they stack. Credits never expire while your account is active. Start with 14 free credits on signup, no credit card required. All prices in AUD, GST inclusive.
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section alt" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow"><span class="sec-num">06</span>Frequently asked</span>
+      <h2 class="display-2">Questions about<br/>AI virtual staging, <em class="accent">answered.</em></h2>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Is virtual staging MLS-compliant?</summary>
+        <div class="answer">Yes. StageRight output is virtual staging, not a representation of actual furniture on site. Agents should disclose in listing descriptions and label photos as 'virtually staged' — standard practice across Australian REIA, US NAR and Canadian REBBA guidelines.</div>
+      </details>
+      <details class="faq-item">
+        <summary>How does AI virtual staging compare to traditional staging?</summary>
+        <div class="answer">Physical staging runs $2,300–$3,200 per home, takes weeks, and requires a vacant property with furniture rental and movers. Human-edit virtual staging is $20–$30 per photo with a 24–48 hour turnaround. StageRight is from $0.73 AUD per credit, under a minute, and works on any photo — empty or furnished.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Why not just use ChatGPT, Gemini or Midjourney?</summary>
+        <div class="answer">General-purpose AI tools are built to make new images, not to faithfully restage your room. They distort architecture (windows shift, walls move), get furniture scale wrong, and produce a different room each generation. StageRight is purpose-built for interior staging — it preserves the room you uploaded and just adds the furniture.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What image formats and resolutions does StageRight accept?</summary>
+        <div class="answer">JPG or PNG up to 10 MB, any resolution. Phone photos work fine. Furnished or empty rooms are both supported.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What styles can I stage in?</summary>
+        <div class="answer">Twelve curated interior styles: Modern, Scandinavian, Coastal, Hamptons, Luxury, Farmhouse, Mid-Century Modern, Industrial, Minimalist, Contemporary Australian, Japandi and Boho. Contemporary Australian is specifically tuned to the AU market aesthetic.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Do credits expire?</summary>
+        <div class="answer">No. Credits never expire while your account is active. If the service is ever sunset, unused credits are refunded at purchase price — no forfeiture clauses.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What's a "take"?</summary>
+        <div class="answer">One AI-generated version of your room in a chosen style. AI is creative and inconsistent — Three Takes (the default) means three versions of every styling, so you almost always have one you love. You can also choose Single Take per style at checkout for half the credits.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section">
+  <div class="wrap">
+    <div class="final-cta">
+      <h2 class="display-2">Your first 14 credits<br/>are <em class="accent">on us.</em></h2>
+      <p>No credit card, no lock-in. Earn your first free credit after seven you spend.</p>
+      <a href="#" class="btn btn-primary btn-large">
+        Start staging
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-about">
+        <a href="#" class="logo">
+          <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M32 4 L56 18 L56 46 L32 60 L8 46 L8 18 Z" stroke-width="1.6"/>
+            <path d="M32 9.5 L51 21 L51 43 L32 54.5 L13 43 L13 21 Z" stroke-width="1.2"/>
+            <rect x="18.5" y="22" width="9" height="13" stroke-width="1.2"/>
+            <line x1="23" y1="22" x2="23" y2="35" stroke-width="1.2"/>
+            <line x1="18.5" y1="28.5" x2="27.5" y2="28.5" stroke-width="1.2"/>
+            <path d="M32 32 L46 32 Q47.5 32 47.5 33.5 L47.5 41 L30.5 41 L30.5 33.5 Q30.5 32 32 32 Z" stroke-width="1.3"/>
+            <line x1="32" y1="41" x2="32" y2="45" stroke-width="1.2"/>
+            <line x1="46" y1="41" x2="46" y2="45" stroke-width="1.2"/>
+            <line x1="14" y1="46" x2="50" y2="46" stroke-width="1"/>
+          </svg>
+          <span class="logo-text">Stage<em>Right</em></span>
+        </a>
+        <p>AI virtual staging for real estate. Photorealistic interiors in about a minute. Built in Australia.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#styles">Styles</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">Terms of service</a></li>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Account</h4>
+        <ul>
+          <li><a href="#">Sign in</a></li>
+          <li><a href="#">Get started</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 StageRight. Built in Australia.</span>
+      <span>Images are AI generated and may vary.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // BG switcher — persisted via URL hash so reload keeps choice
+  (function setupBgSwitcher() {
+    const buttons = document.querySelectorAll('.bg-switcher button');
+    const body = document.body;
+    function setBg(key) {
+      body.classList.remove('bg-a','bg-b','bg-c','bg-d','bg-e');
+      body.classList.add('bg-' + key);
+      buttons.forEach(b => b.classList.toggle('active', b.dataset.bg === key));
+      window.location.hash = '#bg-' + key;
+    }
+    buttons.forEach(b => b.addEventListener('click', () => setBg(b.dataset.bg)));
+    // Restore from hash on load
+    const m = (window.location.hash || '').match(/^#bg-([abcde])$/);
+    if (m) setBg(m[1]);
+    // Keyboard shortcuts: A/B/C/D/E
+    window.addEventListener('keydown', (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      const k = e.key.toLowerCase();
+      if (['a','b','c','d','e'].includes(k)) setBg(k);
+    });
+  })();
+
+  // Comparison cards — IntersectionObserver staggered cascade
+  (function setupCompareReveal() {
+    const cards = document.querySelectorAll('.compare-card');
+    if (!cards.length) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !('IntersectionObserver' in window)) {
+      cards.forEach(c => c.classList.add('in-view'));
+      return;
+    }
+    let fired = false;
+    const trigger = () => {
+      if (fired) return;
+      fired = true;
+      cards.forEach((card, i) => setTimeout(() => card.classList.add('in-view'), i * 110));
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { trigger(); io.disconnect(); }
+      });
+    }, { threshold: 0.18, rootMargin: '0px 0px -8% 0px' });
+    io.observe(cards[0]);
+  })();
+
+  // Pricing toggle — swap one-time / monthly grids
+  (function setupPricingToggle() {
+    const buttons = document.querySelectorAll('.pricing-toggle button');
+    const grids = document.querySelectorAll('.pricing-grid');
+    if (!buttons.length || !grids.length) return;
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const mode = btn.dataset.mode;
+        buttons.forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+        grids.forEach(g => {
+          if (g.dataset.mode === mode) { g.removeAttribute('hidden'); }
+          else { g.setAttribute('hidden', ''); }
+        });
+      });
+    });
+  })();
+
+  // Room pill switcher — visual only in mock; swaps active class
+  (function setupRoomPills() {
+    const pills = document.querySelectorAll('.room-pill');
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.toggle('active', p === pill));
+      });
+    });
+  })();
+
+  // Hero before/after slider
+  const frame   = document.getElementById('frame');
+  const staged  = document.getElementById('staged');
+  const handle  = document.getElementById('handle');
+  const divider = document.getElementById('divider');
+
+  let pos = 50;
+  let dragging = false;
+  let userInteracted = false;
+
+  function setPos(p) {
+    p = Math.max(0, Math.min(100, p));
+    pos = p;
+    staged.style.clipPath = `inset(0 ${100 - p}% 0 0)`;
+    divider.style.left = `${p}%`;
+    handle.style.left = `${p}%`;
+  }
+  function animateTo(target, duration) {
+    const start = pos;
+    const t0 = performance.now();
+    function tick(now) {
+      const k = Math.min(1, (now - t0) / duration);
+      const e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+      setPos(start + (target - start) * e);
+      if (k < 1 && !dragging) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  function autoDemo() {
+    if (userInteracted) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setTimeout(() => { if (!userInteracted) animateTo(15, 900); }, 600);
+    setTimeout(() => { if (!userInteracted) animateTo(85, 900); }, 2000);
+    setTimeout(() => { if (!userInteracted) animateTo(50, 900); }, 3300);
+  }
+  setPos(50);
+  autoDemo();
+
+  function pointerMove(e) {
+    if (!dragging) return;
+    const rect = frame.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    setPos((x / rect.width) * 100);
+  }
+  function pointerDown(e) { dragging = true; userInteracted = true; document.body.style.cursor = 'ew-resize'; pointerMove(e); e.preventDefault(); }
+  function pointerUp() { dragging = false; document.body.style.cursor = ''; }
+  handle?.addEventListener('mousedown', pointerDown);
+  frame?.addEventListener('mousedown', pointerDown);
+  window.addEventListener('mousemove', pointerMove);
+  window.addEventListener('mouseup', pointerUp);
+  handle?.addEventListener('touchstart', pointerDown, { passive: false });
+  frame?.addEventListener('touchstart', pointerDown, { passive: false });
+  window.addEventListener('touchmove', pointerMove);
+  window.addEventListener('touchend', pointerUp);
+</script>
+
+</body>
+</html>

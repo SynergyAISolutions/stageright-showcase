@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>StageRight — direction A v2 (editorial-warm)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* ── Brand surfaces — warm cream system, three layers for depth ── */
+    --bg:         #F2EDE0;     /* base — warm cream */
+    --bg-soft:    #F7F3E9;     /* 1 step up — section break */
+    --surface:    #FBF8F0;     /* card surface — quietly white-er */
+    --surface-2:  #FFFCF4;     /* hottest white — used sparingly for "premium" cards */
+
+    /* ── Ink — deep teal sourced from the logo ── */
+    --ink:        #1F3539;     /* primary text + chrome ink */
+    --ink-2:      #2C4549;     /* secondary heading ink */
+    --ink-soft:   #4F6468;     /* reliable label color — NOT ghost */
+    --ink-mute:   #7B8A8D;     /* tertiary, used carefully */
+
+    /* ── Hairlines ── */
+    --hairline:   #D9D0BE;
+    --hairline-2: #C5BAA4;
+
+    /* ── Brand accents — these are what make this a BRAND not a template ── */
+    --sage:       #7FA08A;     /* the logo chair color */
+    --sage-deep:  #5A7E68;     /* italic accent — strong contrast vs ink */
+    --sage-soft:  #C8D4CC;     /* tints / soft fills */
+    --timber:     #B5895A;     /* warm wood */
+    --timber-deep:#8B6840;     /* deep timber — secondary accent */
+    --terra:      #C76F4E;     /* live indicators only — never decorative */
+
+    /* ── Shadows — used with intention, never as default chrome ── */
+    --shadow-hero:  0 64px 130px -50px rgba(31, 53, 57, 0.38),
+                    0 24px 60px  -20px rgba(31, 53, 57, 0.18);
+    --shadow-card:  0 30px 60px  -28px rgba(31, 53, 57, 0.22),
+                    0 10px 24px  -10px rgba(31, 53, 57, 0.10);
+    --shadow-soft:  0 16px 32px  -16px rgba(31, 53, 57, 0.18);
+
+    --radius-lg: 20px;
+    --radius-md: 14px;
+    --radius-sm: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  html, body { background: var(--bg); color: var(--ink); }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    line-height: 1.55;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Grain — atmospheric warmth, slightly stronger than v1 for depth */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 1000;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    opacity: 0.32;
+    mix-blend-mode: multiply;
+  }
+
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+  .wrap {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 4vw, 40px);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ─────────────── TYPE SYSTEM ─────────────── */
+
+  /* Display — Fraunces variable, soft optical axis. The serif soul of the brand. */
+  .display-1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(40px, 7vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+  }
+  .display-2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.04;
+    letter-spacing: -0.03em;
+    font-variation-settings: "opsz" 144, "SOFT" 30;
+  }
+
+  /* Italic accents — the BRAND moment. Strong color delta vs surrounding ink. */
+  em.accent {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sage-deep);
+    font-variation-settings: "opsz" 144, "SOFT" 80;
+    letter-spacing: -0.04em;
+  }
+  em.timber {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--timber-deep);
+    font-variation-settings: "opsz" 144, "SOFT" 80;
+  }
+
+  /* Eyebrow — bumped to 11.5px, ink-soft not ink-mute, weight 500. NOT GHOST. */
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(11px, 1vw, 12px);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--ink-soft);
+  }
+
+  .body-lg { font-size: clamp(16px, 1.4vw, 19px); line-height: 1.6; color: var(--ink-soft); }
+
+  /* ─── BUTTONS ─── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 22px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    border: 1px solid transparent;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg-soft);
+    border-color: var(--ink);
+    box-shadow: var(--shadow-soft);
+  }
+  .btn-primary:hover {
+    background: var(--ink-2);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px -10px rgba(31, 53, 57, 0.45);
+  }
+  .btn-primary svg { transition: transform 0.25s; }
+  .btn-primary:hover svg { transform: translateX(3px); }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--hairline-2);
+  }
+  .btn-ghost:hover {
+    background: var(--surface);
+    border-color: var(--ink-soft);
+  }
+
+  .btn-large { padding: 17px 28px; font-size: 16px; }
+  .btn-block { width: 100%; }
+
+  /* ─────────────── NAV ─────────────── */
+  nav {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--hairline);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(242, 237, 224, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; color: var(--ink); }
+  .logo-mark { width: 36px; height: 36px; color: var(--ink); }
+  .logo-text {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 22px;
+    letter-spacing: -0.015em;
+    font-variation-settings: "opsz" 96, "SOFT" 50;
+  }
+  .logo-text em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sage-deep);
+  }
+
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    transition: color 0.2s;
+    padding: 8px 0;
+  }
+  .nav-links a:hover { color: var(--sage-deep); }
+  .nav-links a .num {
+    color: var(--ink-mute);
+    margin-right: 6px;
+    font-weight: 400;
+  }
+
+  .nav-actions { display: flex; gap: 10px; align-items: center; }
+  .nav-actions .signin {
+    font-size: 14px;
+    color: var(--ink);
+    padding: 10px 6px;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .nav-actions .signin:hover { border-bottom-color: var(--ink); }
+
+  .menu-toggle {
+    display: none;
+    width: 40px; height: 40px;
+    align-items: center; justify-content: center;
+    border-radius: 8px;
+    color: var(--ink);
+  }
+  .menu-toggle:hover { background: var(--surface); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 73px; left: 0; right: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--hairline);
+    padding: 24px 20px 32px;
+    z-index: 99;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s;
+  }
+  .mobile-menu.open { transform: translateY(0); opacity: 1; }
+  .mobile-menu a {
+    display: block;
+    padding: 14px 0;
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--hairline);
+    font-variation-settings: "opsz" 48, "SOFT" 30;
+  }
+  .mobile-menu a:last-of-type { border-bottom: none; }
+  .mobile-menu .actions {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* ─────────────── HERO ─────────────── */
+  .hero {
+    padding: clamp(48px, 8vw, 96px) 0 clamp(60px, 9vw, 110px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Two glow blobs — sage (right) + timber (lower-left) for depth and brand */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -10%; right: -20%;
+    width: 70vw; height: 70vw;
+    max-width: 900px; max-height: 900px;
+    background: radial-gradient(circle, rgba(127, 160, 138, 0.22) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -25%; left: -15%;
+    width: 60vw; height: 60vw;
+    max-width: 720px; max-height: 720px;
+    background: radial-gradient(circle, rgba(181, 137, 90, 0.14) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-copy h1 {
+    margin-bottom: clamp(20px, 2.5vw, 28px);
+    margin-top: 24px;
+  }
+  .hero-copy .subhead {
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin-bottom: clamp(28px, 3.5vw, 40px);
+  }
+  .hero-copy .subhead strong { color: var(--ink); font-weight: 600; }
+
+  .hero-cta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 22px;
+  }
+
+  .hero-micro {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    font-weight: 500;
+    flex-wrap: wrap;
+  }
+  .hero-micro .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--sage);
+    box-shadow: 0 0 0 4px rgba(127, 160, 138, 0.22);
+    flex-shrink: 0;
+  }
+
+  /* ─── Hero photo ─── */
+  .hero-visual { position: relative; width: 100%; }
+  .frame {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-hero);
+    transform: rotate(0.8deg);
+    border: 1px solid rgba(255,255,255,0.6);
+    background: var(--surface);
+  }
+  .frame-meta {
+    position: absolute;
+    top: 14px; left: 14px;
+    z-index: 5;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    color: rgba(255,255,255,0.95);
+    background: rgba(31, 53, 57, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .live-dot {
+    width: 6px; height: 6px;
+    background: var(--terra);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(199, 111, 78, 0.6); }
+    50%      { opacity: 0.6; box-shadow: 0 0 0 6px rgba(199, 111, 78, 0); }
+  }
+
+  .img-layer {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+  }
+  .img-empty {
+    background-color: #C9C2B6;
+    background-image: url("https://images.unsplash.com/photo-1505691938895-1758d7feb511?w=1600&q=80");
+  }
+  .img-staged {
+    background-color: #B5A992;
+    background-image: url("https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1600&q=80");
+    clip-path: inset(0 0 0 0%);
+  }
+
+  .divider {
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    transform: translateX(-1px);
+    z-index: 4;
+    pointer-events: none;
+  }
+  .handle {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--bg-soft);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 8px 24px -6px rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+    cursor: ew-resize;
+    color: var(--ink);
+  }
+
+  .img-tag {
+    position: absolute;
+    bottom: 14px;
+    z-index: 4;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    background: rgba(31, 53, 57, 0.65);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: rgba(255,255,255,0.95);
+    padding: 6px 10px;
+    border-radius: 4px;
+  }
+  .img-tag.left { left: 14px; }
+  .img-tag.right { right: 14px; }
+
+  /* Floating stat cards — opaque-cream bordered hairline; the depth move */
+  .stat {
+    position: absolute;
+    background: rgba(251, 248, 240, 0.92);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid rgba(255,255,255,0.7);
+    border-radius: var(--radius-md);
+    padding: 14px 18px;
+    box-shadow: var(--shadow-card);
+    z-index: 6;
+  }
+  .stat-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(26px, 3vw, 34px);
+    line-height: 1;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144, "SOFT" 40;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+  }
+  .stat-num .small {
+    font-size: 0.5em;
+    color: var(--sage-deep);
+    font-style: italic;
+    font-weight: 300;
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .stat-source {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-mute);
+    margin-top: 6px;
+    border-top: 1px solid var(--hairline);
+    padding-top: 6px;
+    white-space: nowrap;
+  }
+  .stat.tl { top: 16px; right: 16px; }
+  .stat.br { bottom: 60px; left: 16px; }
+
+  /* ─────────────── TECHNICAL STRIP ─────────────── */
+  .technical-strip {
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    background: var(--bg-soft);
+    padding: 18px 0;
+    position: relative;
+    z-index: 1;
+  }
+  .strip-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .strip-row span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .strip-row span::before {
+    content: '';
+    width: 5px; height: 5px;
+    background: var(--sage);
+    border-radius: 50%;
+  }
+
+  /* ─────────────── SECTIONS ─────────────── */
+  .section {
+    padding: clamp(64px, 9vw, 120px) 0;
+    position: relative;
+  }
+  .section.alt { background: var(--bg-soft); }
+
+  .section-head {
+    max-width: 720px;
+    margin: 0 auto clamp(40px, 6vw, 72px);
+    text-align: center;
+  }
+  .section-head .eyebrow { margin-bottom: 20px; justify-content: center; }
+  .section-head h2 { margin-bottom: 16px; }
+  .section-head p {
+    font-size: clamp(15px, 1.3vw, 18px);
+    color: var(--ink-soft);
+  }
+
+  /* ─── COMPARISON · 4 CARDS, DARK BG ─── */
+  #compare {
+    background: var(--ink);
+    color: var(--bg);
+    padding: clamp(72px, 10vw, 130px) 0;
+    position: relative;
+    overflow: hidden;
+  }
+  #compare::before {
+    content: '';
+    position: absolute;
+    top: -20%; right: -10%;
+    width: 60vw; height: 60vw;
+    max-width: 720px; max-height: 720px;
+    background: radial-gradient(circle, rgba(127, 160, 138, 0.16) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  #compare .section-head h2 { color: var(--bg); }
+  #compare .section-head p { color: rgba(242, 237, 224, 0.72); }
+  #compare .eyebrow { color: rgba(242, 237, 224, 0.78); }
+  #compare .eyebrow::before { background: rgba(242, 237, 224, 0.5); }
+
+  .compare-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(16px, 1.8vw, 22px);
+    align-items: stretch;
+    position: relative;
+    z-index: 1;
+  }
+  .compare-card {
+    background: rgba(251, 248, 240, 0.04);
+    border: 1px solid rgba(251, 248, 240, 0.13);
+    border-radius: var(--radius-lg);
+    padding: clamp(22px, 2.4vw, 30px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* Entrance state — observer adds .in-view to release */
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+      background 0.3s ease;
+  }
+  .compare-card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .compare-card.featured.in-view {
+    transform: translateY(-12px);
+  }
+  /* Mobile / tablet — featured card sits flat (no -12 lift) */
+  @media (max-width: 1100px) {
+    .compare-card.featured.in-view { transform: translateY(0); }
+  }
+  /* Hover only kicks in once entrance is done, respects featured rest state */
+  .compare-card:not(.featured).in-view:hover {
+    background: rgba(251, 248, 240, 0.07);
+    transform: translateY(-3px);
+  }
+  .compare-card.featured {
+    background: var(--bg);
+    border-color: var(--bg);
+    color: var(--ink);
+    box-shadow: var(--shadow-card);
+  }
+  /* Reduced motion — skip the stagger animation entirely */
+  @media (prefers-reduced-motion: reduce) {
+    .compare-card { opacity: 1; transform: none !important; transition: background 0.3s ease; }
+    .compare-card.featured.in-view { transform: translateY(-12px) !important; }
+    @media (max-width: 1100px) {
+      .compare-card.featured.in-view { transform: translateY(0) !important; }
+    }
+  }
+  .compare-card .badge-fast {
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    background: var(--sage);
+    color: var(--bg-soft);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    padding: 6px 11px;
+    border-radius: 999px;
+  }
+  .compare-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(20px, 1.8vw, 26px);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 14px;
+    font-variation-settings: "opsz" 96, "SOFT" 30;
+  }
+  .compare-price {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+    font-family: 'Fraunces', serif;
+    font-size: clamp(22px, 2.4vw, 30px);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 144, "SOFT" 40;
+    line-height: 1.1;
+  }
+  .compare-card.featured .compare-price em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sage-deep);
+    font-variation-settings: "opsz" 144, "SOFT" 80;
+  }
+  .compare-price .per {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    color: currentColor;
+    opacity: 0.65;
+    font-style: normal;
+    font-weight: 400;
+  }
+  .compare-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin-bottom: 22px;
+    color: currentColor;
+    opacity: 0.78;
+  }
+  .compare-list { list-style: none; padding: 0; margin: 0 0 20px; flex: 1; }
+  .compare-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 7px 0;
+    font-size: 14px;
+    color: currentColor;
+    opacity: 0.88;
+    line-height: 1.45;
+  }
+  .compare-list li::before {
+    content: '';
+    width: 14px; height: 14px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 7l3 3 5-7' stroke='%237FA08A' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+  .compare-list.cons li::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M4 4l6 6M10 4l-6 6' stroke='%23C76F4E' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E");
+  }
+  .compare-card.featured .compare-list li::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none'%3E%3Cpath d='M3 7l3 3 5-7' stroke='%235A7E68' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  }
+  .compare-tagline {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid rgba(251, 248, 240, 0.16);
+    font-style: italic;
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 14.5px;
+    opacity: 0.82;
+    font-variation-settings: "opsz" 36, "SOFT" 80;
+    line-height: 1.4;
+  }
+  .compare-card.featured .compare-tagline {
+    border-top-color: var(--hairline);
+    color: var(--ink-soft);
+    opacity: 1;
+  }
+
+  .compliance-note {
+    margin-top: 40px;
+    padding: 18px 22px;
+    background: rgba(251, 248, 240, 0.06);
+    border: 1px solid rgba(251, 248, 240, 0.10);
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    text-align: center;
+    color: rgba(242, 237, 224, 0.82);
+    position: relative;
+    z-index: 1;
+    line-height: 1.55;
+  }
+
+  /* ─────────────── RESPONSIVE ─────────────── */
+  @media (max-width: 1100px) {
+    .compare-grid { grid-template-columns: repeat(2, 1fr); }
+    .compare-card.featured { transform: none; }
+  }
+
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+    .hero-visual { max-width: 640px; margin: 0 auto; }
+    .frame { transform: rotate(0); }
+  }
+
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+    .nav-actions .signin { display: none; }
+    .nav-actions .btn { display: none; }
+    .menu-toggle { display: flex; }
+    .mobile-menu { display: block; }
+
+    .hero-cta { flex-direction: column; align-items: stretch; }
+    .hero-cta .btn { width: 100%; }
+
+    .stat.tl { top: 12px; right: 12px; padding: 10px 14px; }
+    .stat.br { bottom: 50px; left: 12px; padding: 10px 14px; }
+
+    .strip-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .strip-row span { font-size: 11px; }
+
+    .compare-grid { grid-template-columns: 1fr; }
+    .compare-card.featured { order: -1; }
+  }
+
+  @media (max-width: 420px) {
+    .stat-source { display: none; }
+    .stat.tl { top: 10px; right: 10px; }
+    .stat.br { bottom: 46px; left: 10px; }
+    .frame-meta { font-size: 10px; }
+    .img-tag { font-size: 10px; padding: 5px 8px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+
+  /* ─────────────── ENTRANCE ─────────────── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: fadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .d1 { animation-delay: 0.05s; }
+  .d2 { animation-delay: 0.18s; }
+  .d3 { animation-delay: 0.32s; }
+  .d4 { animation-delay: 0.46s; }
+  .d5 { animation-delay: 0.6s; }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="wrap">
+    <div class="nav-row">
+      <a href="#" class="logo" aria-label="StageRight home">
+        <svg class="logo-mark" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M32 4 L56 18 L56 46 L32 60 L8 46 L8 18 Z" stroke-width="1.6"/>
+          <path d="M32 9.5 L51 21 L51 43 L32 54.5 L13 43 L13 21 Z" stroke-width="1.2"/>
+          <rect x="18.5" y="22" width="9" height="13" stroke-width="1.2"/>
+          <line x1="23" y1="22" x2="23" y2="35" stroke-width="1.2"/>
+          <line x1="18.5" y1="28.5" x2="27.5" y2="28.5" stroke-width="1.2"/>
+          <path d="M32 32 L46 32 Q47.5 32 47.5 33.5 L47.5 41 L30.5 41 L30.5 33.5 Q30.5 32 32 32 Z" stroke-width="1.3"/>
+          <line x1="32" y1="41" x2="32" y2="45" stroke-width="1.2"/>
+          <line x1="46" y1="41" x2="46" y2="45" stroke-width="1.2"/>
+          <line x1="14" y1="46" x2="50" y2="46" stroke-width="1"/>
+        </svg>
+        <span class="logo-text">Stage<em>Right</em></span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#"><span class="num">01</span>How it works</a>
+        <a href="#"><span class="num">02</span>Styles</a>
+        <a href="#"><span class="num">03</span>Pricing</a>
+        <a href="#"><span class="num">04</span>FAQ</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="#" class="signin">Sign in</a>
+        <a href="#" class="btn btn-primary">
+          Get started
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#">How it works</a>
+    <a href="#">Styles</a>
+    <a href="#">Pricing</a>
+    <a href="#">FAQ</a>
+    <a href="#">Sign in</a>
+    <div class="actions">
+      <a href="#" class="btn btn-primary btn-block">Get started free</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+
+      <div class="hero-copy">
+        <span class="eyebrow fade-up d1">Virtual staging · for real estate</span>
+
+        <h1 class="display-1 fade-up d2">
+          Photorealistic<br/>
+          <em class="accent">staging,</em> ready<br/>
+          in <em class="accent">about a minute.</em>
+        </h1>
+
+        <p class="subhead fade-up d3">
+          Upload an empty or furnished room. Pick a style. Get a <strong>full-resolution staged photo</strong> back in roughly sixty seconds — twelve curated interior styles, ready to list.
+        </p>
+
+        <div class="hero-cta fade-up d4">
+          <a href="#" class="btn btn-primary btn-large">
+            Start with 14 free credits
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#" class="btn btn-ghost btn-large">
+            See how it works
+          </a>
+        </div>
+
+        <div class="hero-micro fade-up d5">
+          <span class="dot"></span>
+          <span>No credit card · Earn a free credit every 7 you spend</span>
+        </div>
+      </div>
+
+      <div class="hero-visual fade-up d3">
+        <div class="frame" id="frame">
+          <div class="frame-meta">
+            <span class="live-dot"></span>Live preview · Hamptons style
+          </div>
+          <div class="img-layer img-empty"></div>
+          <div class="img-layer img-staged" id="staged"></div>
+          <div class="divider" id="divider"></div>
+          <div class="handle" id="handle">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/>
+            </svg>
+          </div>
+          <div class="img-tag left">Empty</div>
+          <div class="img-tag right">Staged</div>
+
+          <div class="stat tl">
+            <div class="stat-num">~60<span class="small">s</span></div>
+            <div class="stat-label">First image</div>
+            <div class="stat-source">Typical render</div>
+          </div>
+          <div class="stat br">
+            <div class="stat-num">$0.73<span class="small">AUD</span></div>
+            <div class="stat-label">From, per image</div>
+            <div class="stat-source">At the Bulk pack</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TECHNICAL STRIP — micro-trust line, mono labels with sage dots, 12px legible -->
+<div class="technical-strip">
+  <div class="wrap strip-row">
+    <span>No credit card required</span>
+    <span>Free credit every 7 you spend</span>
+    <span>GST inclusive · AUD</span>
+  </div>
+</div>
+
+<!-- COMPARISON — 4 ways to stage, exact original copy -->
+<section id="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Why StageRight</span>
+      <h2 class="display-2">Four ways to stage a listing.<br/>Only one is built for the <em class="accent">job.</em></h2>
+      <p>Side by side, the actual numbers.</p>
+    </div>
+
+    <div class="compare-grid">
+
+      <div class="compare-card">
+        <h3>Physical staging</h3>
+        <div class="compare-price">$2,300–$3,200 <span class="per">/ home</span></div>
+        <div class="compare-time">Turnaround · weeks</div>
+        <ul class="compare-list cons">
+          <li>Requires vacant property</li>
+          <li>Furniture rental + delivery</li>
+          <li>Schedule stylists + movers</li>
+          <li>Photo shoot after setup</li>
+          <li>Restage = full re-do</li>
+        </ul>
+        <div class="compare-tagline">Real furniture, real time, real cost.</div>
+      </div>
+
+      <div class="compare-card">
+        <h3>Human-edit virtual</h3>
+        <div class="compare-price">$20–$30 <span class="per">/ image</span></div>
+        <div class="compare-time">Turnaround · 24–48 hours</div>
+        <ul class="compare-list cons">
+          <li>Editors handle each photo manually</li>
+          <li>Limited revisions per purchase</li>
+          <li>Queue times on weekends</li>
+          <li>Style options vary by provider</li>
+          <li>Per-image pricing only</li>
+        </ul>
+        <div class="compare-tagline">Handcrafted, but slow and per-piece.</div>
+      </div>
+
+      <div class="compare-card">
+        <h3>General AI tools</h3>
+        <div class="compare-price">$0–$20 <span class="per">/ month</span></div>
+        <div class="compare-time">Turnaround · trial &amp; error</div>
+        <ul class="compare-list cons">
+          <li>Built for art, not real estate</li>
+          <li>Distorts walls, windows, doors</li>
+          <li>Furniture floats, scale is wrong</li>
+          <li>Needs prompt engineering know-how</li>
+          <li>No saved styles, no consistency</li>
+        </ul>
+        <div class="compare-tagline">Cheap — but the room you get isn't yours.</div>
+      </div>
+
+      <div class="compare-card featured">
+        <span class="badge-fast">Built for staging</span>
+        <h3>StageRight AI</h3>
+        <div class="compare-price">From <em>$0.73</em> <span class="per">AUD / image</span></div>
+        <div class="compare-time">Turnaround · under a minute</div>
+        <ul class="compare-list">
+          <li>Preserves your room exactly</li>
+          <li>Twelve curated interior styles</li>
+          <li>Photorealistic, full resolution</li>
+          <li>Free credit every 7 you spend</li>
+          <li>Credits never expire while active</li>
+        </ul>
+        <div class="compare-tagline">Purpose-built. The right room, just furnished.</div>
+      </div>
+
+    </div>
+
+    <div class="compliance-note">
+      Virtual staging must be disclosed in listings. Label images as &ldquo;virtually staged&rdquo; — standard practice across REIA (AU), NAR (US) and REBBA (CA).
+    </div>
+  </div>
+</section>
+
+<script>
+  // Comparison cards — IntersectionObserver staggered cascade
+  // Tier sequence reinforces left-to-right reading on desktop, top-to-bottom on mobile.
+  // Delays are screen-size-agnostic; respects prefers-reduced-motion via CSS.
+  (function setupCompareReveal() {
+    const cards = document.querySelectorAll('.compare-card');
+    if (!cards.length) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) {
+      cards.forEach(c => c.classList.add('in-view'));
+      return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      cards.forEach(c => c.classList.add('in-view'));
+      return;
+    }
+
+    // First card observed in the section triggers the whole cascade.
+    let fired = false;
+    const trigger = () => {
+      if (fired) return;
+      fired = true;
+      cards.forEach((card, i) => {
+        setTimeout(() => card.classList.add('in-view'), i * 110);
+      });
+    };
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          trigger();
+          io.disconnect();
+        }
+      });
+    }, {
+      threshold: 0.18,
+      // Slightly inset rootMargin so reveal fires when the section meaningfully
+      // enters view, not the moment 1px crosses the fold.
+      rootMargin: '0px 0px -8% 0px',
+    });
+
+    io.observe(cards[0]);
+  })();
+
+  // Mobile menu
+  const toggle = document.getElementById('menuToggle');
+  const menu   = document.getElementById('mobileMenu');
+  toggle?.addEventListener('click', () => { menu.classList.toggle('open'); });
+  menu?.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => menu.classList.remove('open')); });
+
+  // Slider
+  const frame   = document.getElementById('frame');
+  const staged  = document.getElementById('staged');
+  const handle  = document.getElementById('handle');
+  const divider = document.getElementById('divider');
+
+  let pos = 50;
+  let dragging = false;
+  let userInteracted = false;
+
+  function setPos(p) {
+    p = Math.max(0, Math.min(100, p));
+    pos = p;
+    staged.style.clipPath = `inset(0 ${100 - p}% 0 0)`;
+    divider.style.left = `${p}%`;
+    handle.style.left = `${p}%`;
+  }
+
+  function animateTo(target, duration) {
+    const start = pos;
+    const t0 = performance.now();
+    function tick(now) {
+      const k = Math.min(1, (now - t0) / duration);
+      const e = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+      setPos(start + (target - start) * e);
+      if (k < 1 && !dragging) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function autoDemo() {
+    if (userInteracted) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setTimeout(() => { if (!userInteracted) animateTo(15, 900); }, 600);
+    setTimeout(() => { if (!userInteracted) animateTo(85, 900); }, 2000);
+    setTimeout(() => { if (!userInteracted) animateTo(50, 900); }, 3300);
+  }
+
+  setPos(50);
+  autoDemo();
+
+  function pointerMove(e) {
+    if (!dragging) return;
+    const rect = frame.getBoundingClientRect();
+    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+    setPos((x / rect.width) * 100);
+  }
+  function pointerDown(e) {
+    dragging = true;
+    userInteracted = true;
+    document.body.style.cursor = 'ew-resize';
+    pointerMove(e);
+    e.preventDefault();
+  }
+  function pointerUp() {
+    dragging = false;
+    document.body.style.cursor = '';
+  }
+
+  handle?.addEventListener('mousedown', pointerDown);
+  frame?.addEventListener('mousedown', pointerDown);
+  window.addEventListener('mousemove', pointerMove);
+  window.addEventListener('mouseup', pointerUp);
+
+  handle?.addEventListener('touchstart', pointerDown, { passive: false });
+  frame?.addEventListener('touchstart', pointerDown, { passive: false });
+  window.addEventListener('touchmove', pointerMove);
+  window.addEventListener('touchend', pointerUp);
+</script>
+
+</body>
+</html>

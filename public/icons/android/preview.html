@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StageRight Icon Preview</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; background: #0d1114; color: #f8efe4; font-family: Inter, "Segoe UI", system-ui, sans-serif; padding: 40px 32px 80px; }
+  h1 { font-size: 22px; margin: 0 0 4px; font-weight: 600; }
+  .lede { color: #9aa3a6; margin: 0 0 32px; font-size: 13px; max-width: 640px; line-height: 1.55; }
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b7376; margin: 36px 0 14px; font-weight: 600; }
+  h2 .note { text-transform: none; letter-spacing: 0; color: #9aa3a6; font-weight: 400; margin-left: 8px; }
+  .row { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 14px; }
+  .tile { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .swatch-light, .swatch-dark, .swatch-checker { width: 100%; aspect-ratio: 1 / 1; border-radius: 12px; display: grid; place-items: center; }
+  .swatch-light { background: #FAF6EF; }
+  .swatch-dark  { background: #1F3539; }
+  .swatch-checker {
+    background-color: #1a2024;
+    background-image:
+      linear-gradient(45deg, #2a3034 25%, transparent 25%),
+      linear-gradient(-45deg, #2a3034 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #2a3034 75%),
+      linear-gradient(-45deg, transparent 75%, #2a3034 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, 10px 0px;
+  }
+  .swatch-light img, .swatch-dark img, .swatch-checker img { width: 88%; height: 88%; object-fit: contain; }
+  .name { font-size: 11px; color: #9aa3a6; word-break: break-word; text-align: center; line-height: 1.3; }
+  .android-pill { width: 100%; aspect-ratio: 1 / 1; border-radius: 9999px; overflow: hidden; display: grid; place-items: center; background: #FAF6EF; }
+  .android-pill img { width: 100%; height: 100%; object-fit: cover; }
+</style>
+</head>
+<body>
+  <h1>StageRight Icon Set</h1>
+  <p class="lede">Each icon shown on the surface it'll actually render against. The transparent files have a checker background so you can see the mark's true shape — no frame is being added.</p>
+
+  <h2>App icons<span class="note">Transparent · used in browser tabs, OG tags, and PWA install</span></h2>
+  <div class="row">
+    <div class="tile"><div class="swatch-checker"><img src="./icon-light-192.png" alt=""></div><div class="name">icon-light-192</div></div>
+    <div class="tile"><div class="swatch-checker"><img src="./icon-light-512.png" alt=""></div><div class="name">icon-light-512</div></div>
+    <div class="tile"><div class="swatch-checker"><img src="./icon-dark-192.png" alt=""></div><div class="name">icon-dark-192</div></div>
+    <div class="tile"><div class="swatch-checker"><img src="./icon-dark-512.png" alt=""></div><div class="name">icon-dark-512</div></div>
+  </div>
+
+  <h2>Logo marks<span class="note">Transparent · used in app header and Schema.org logo</span></h2>
+  <div class="row">
+    <div class="tile"><div class="swatch-light"><img src="./logo-mark-light.png" alt=""></div><div class="name">logo-mark-light · on cream surface</div></div>
+    <div class="tile"><div class="swatch-dark"><img src="./logo-mark-dark.png" alt=""></div><div class="name">logo-mark-dark · on dark surface</div></div>
+  </div>
+
+  <h2>Monochrome<span class="note">Transparent · Android themed icons (file IS transparent — checker bg below proves it)</span></h2>
+  <div class="row">
+    <div class="tile"><div class="swatch-checker"><img src="./monochrome-light.png" alt=""></div><div class="name">monochrome-light (raw file)</div></div>
+    <div class="tile"><div class="swatch-checker"><img src="./monochrome-dark.png" alt=""></div><div class="name">monochrome-dark (raw file)</div></div>
+  </div>
+
+  <h2>Maskable<span class="note">OPAQUE BY REQUIREMENT · Android crops these into circles/squircles on home screen — see right column for actual home-screen result</span></h2>
+  <div class="row">
+    <div class="tile"><div class="swatch-checker"><img src="./maskable-light-512.png" alt=""></div><div class="name">maskable-light-512 (raw)</div></div>
+    <div class="tile"><div class="android-pill"><img src="./maskable-light-512.png" alt=""></div><div class="name">↳ as Android crops it</div></div>
+    <div class="tile"><div class="swatch-checker"><img src="./maskable-dark-512.png" alt=""></div><div class="name">maskable-dark-512 (raw)</div></div>
+    <div class="tile"><div class="android-pill"><img src="./maskable-dark-512.png" alt=""></div><div class="name">↳ as Android crops it</div></div>
+  </div>
+
+  <h2>Adaptive layers<span class="note">Foreground (transparent) + background (solid) — Android composites them together</span></h2>
+  <div class="row">
+    <div class="tile"><div class="swatch-checker"><img src="./adaptive-foreground-light.png" alt=""></div><div class="name">adaptive-foreground-light</div></div>
+    <div class="tile"><div class="swatch-light"><img src="./adaptive-background-light.png" alt=""></div><div class="name">adaptive-background-light</div></div>
+    <div class="tile"><div class="swatch-checker"><img src="./adaptive-foreground-dark.png" alt=""></div><div class="name">adaptive-foreground-dark</div></div>
+    <div class="tile"><div class="swatch-dark"><img src="./adaptive-background-dark.png" alt=""></div><div class="name">adaptive-background-dark</div></div>
+  </div>
+
+  <h2>Play Store listing<span class="note">OPAQUE BY REQUIREMENT · Play Store rejects transparent submissions</span></h2>
+  <div class="row">
+    <div class="tile"><div class="swatch-checker"><img src="./play-store-icon.png" alt=""></div><div class="name">play-store-icon</div></div>
+  </div>
+</body>
+</html>

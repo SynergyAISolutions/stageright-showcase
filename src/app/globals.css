@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-surface text-ink antialiased;
+  }
+
+  ::selection {
+    @apply bg-brand-teal/20 text-brand-navy;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+.skeleton-shimmer {
+  background: linear-gradient(110deg, #e8e8e6 8%, #f2f1ed 18%, #e8e8e6 33%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.8s linear infinite;
+}
+
+@keyframes stage-wait-ken-burns {
+  from { transform: scale(1.08); }
+  to   { transform: scale(1.16); }
+}
+
+@keyframes wait-loader-sweep {
+  0% { left: -30%; }
+  100% { left: 100%; }
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   LANDING REDESIGN v2 — base styles, scoped to .landing-shell
+
+   The architectural-blueprint background (grid + crosshairs + grain),
+   fixed depth blobs, terra ::selection, and the technical title block
+   live here. App pages are unaffected because the wrapper class scopes
+   every selector below.
+
+   Body color flips to sr-cream + sr-ink only inside the shell.
+   ════════════════════════════════════════════════════════════════════ */
+
+.landing-shell {
+  background-color: #FBFAF6;
+  color: #1F3539;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='256' height='256' viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%231F3539' stroke-width='0.9' opacity='0.22' stroke-linecap='round'%3E%3Cline x1='118' y1='128' x2='138' y2='128'/%3E%3Cline x1='128' y1='118' x2='128' y2='138'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(to right, rgba(31, 53, 57, 0.065) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(31, 53, 57, 0.065) 1px, transparent 1px),
+    linear-gradient(to right, rgba(31, 53, 57, 0.022) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(31, 53, 57, 0.022) 1px, transparent 1px);
+  background-size: 256px 256px, 64px 64px, 64px 64px, 16px 16px, 16px 16px;
+  background-position: 0 0;
+  background-attachment: fixed;
+}
+
+.landing-shell::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.10;
+  mix-blend-mode: multiply;
+}
+
+.landing-shell ::selection { background: #C76F4E; color: #FBFAF6; }
+.landing-shell ::-moz-selection { background: #C76F4E; color: #FBFAF6; }
+
+.landing-shell .sr-depth {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.landing-shell .sr-depth-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+  will-change: transform;
+}
+.landing-shell .sr-depth-blob.sage {
+  width: 55vw; height: 55vw; max-width: 760px; max-height: 760px;
+  top: -15%; right: -18%;
+  background: radial-gradient(circle, rgba(127, 160, 138, 0.22) 0%, transparent 65%);
+}
+.landing-shell .sr-depth-blob.timber {
+  width: 48vw; height: 48vw; max-width: 640px; max-height: 640px;
+  bottom: -20%; left: -12%;
+  background: radial-gradient(circle, rgba(181, 137, 90, 0.16) 0%, transparent 70%);
+}
+.landing-shell .sr-depth-blob.terra {
+  width: 32vw; height: 32vw; max-width: 420px; max-height: 420px;
+  top: 45%; left: 35%;
+  background: radial-gradient(circle, rgba(199, 111, 78, 0.10) 0%, transparent 75%);
+}
+
+.landing-shell .sr-title-block {
+  position: fixed;
+  bottom: 16px; right: 16px;
+  z-index: 1;
+  pointer-events: none;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 9px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #4F6468;
+  background: rgba(252, 252, 250, 0.78);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(31, 53, 57, 0.18);
+  border-radius: 2px;
+  width: 168px;
+  box-shadow: 0 6px 18px -10px rgba(31, 53, 57, 0.18);
+}
+.landing-shell .sr-title-block .row {
+  display: flex;
+  border-bottom: 1px solid rgba(31, 53, 57, 0.10);
+  padding: 5px 8px;
+  line-height: 1;
+}
+.landing-shell .sr-title-block .row:last-child { border-bottom: none; }
+.landing-shell .sr-title-block .row .k {
+  color: #7B8A8D;
+  flex: 0 0 36%;
+  font-weight: 500;
+}
+.landing-shell .sr-title-block .row .v { color: #1F3539; font-weight: 600; }
+.landing-shell .sr-title-block .row.head {
+  padding: 6px 8px;
+  background: rgba(31, 53, 57, 0.04);
+  color: #1F3539;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  justify-content: space-between;
+}
+.landing-shell .sr-title-block .row.head .terra {
+  color: #C76F4E;
+  font-weight: 600;
+}
+@media (max-width: 720px) {
+  .landing-shell .sr-title-block { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-shell *, .landing-shell *::before, .landing-shell *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* How It Works stage. stepfill is the section's master clock: React advances
+   the step in its onAnimationEnd, so the bar reaching 100% and the step
+   changing are frame-locked. Duration + play-state are driven inline. The
+   step-02 read rule reuses the same keyframe for its linear spine. */
+@keyframes stepfill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Step-02 finding lockup. Axes are snapped per breakpoint and live in CSS so
+   they can never be animated by accident. opsz tracks the rendered size; SOFT
+   lifted so Fraunces' inky terminals actually show; WONK on above 18px. */
+.hiw-finding {
+  font-size: 17px;
+  line-height: 1.24;
+  letter-spacing: -0.004em;
+  font-variation-settings: "opsz" 40, "SOFT" 36, "WONK" 0;
+  text-wrap: balance;
+}
+@media (min-width: 640px) {
+  .hiw-finding {
+    font-size: 20px;
+    letter-spacing: -0.012em;
+    font-variation-settings: "opsz" 84, "SOFT" 48, "WONK" 1;
+  }
+}
+@media (min-width: 1024px) {
+  .hiw-finding {
+    font-size: 22px;
+    letter-spacing: -0.016em;
+    font-variation-settings: "opsz" 110, "SOFT" 52, "WONK" 1;
+  }
+}
+/* Purely a timer: rides the same element (and so the same play-state) as
+   stepfill, firing 450ms early so the copy panel's exit can never desync
+   from the step change. Animates nothing. */
+@keyframes stepcue {
+  from { opacity: 1; }
+  to { opacity: 1; }
+}

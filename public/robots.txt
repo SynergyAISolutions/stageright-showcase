@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /dashboard
+Disallow: /stage
+Disallow: /admin
+
+Sitemap: https://stageright.aiwave.com.au/sitemap.xml

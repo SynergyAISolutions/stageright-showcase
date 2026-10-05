@@ -1,0 +1,27 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+        - |
+          # Debug: list all env vars starting with our prefixes
+          echo "=== Checking env vars ==="
+          printenv | grep -iE '(GEMINI|APP_AWS|DYNAMODB|S3_BUCKET|NEXT_PUBLIC|ANTHROPIC)' | cut -d= -f1 || echo "No matching env vars found in printenv"
+          echo "=== Writing .env.production ==="
+          printenv | grep -E '^(APP_AWS_|DYNAMODB_|S3_|COGNITO_|GEMINI_|REPLICATE_|STRIPE_|NEXT_PUBLIC_|ANTHROPIC_)' > .env.production || true
+          echo "Wrote $(wc -l < .env.production) env vars to .env.production"
+    build:
+      commands:
+        - |
+          echo "=== .env.production contents (keys only) ==="
+          cat .env.production | cut -d= -f1 || echo "empty"
+          npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .next/cache/**/*
+      - node_modules/**/*
